@@ -1,0 +1,74 @@
+<!-- <body>
+
+  <button class = "button-add" (click)="openModal()">Создать заявку</button>
+
+  <table id = "users">
+    <tr>
+      <th *ngFor = "let column of headers">
+        {{column}}
+      </th>
+    </tr>
+
+    <tr *ngFor = "let row of rows">
+      <td *ngFor = "let column of headers">
+        {{row[column]}}
+      </td>
+    </tr>
+  </table>
+</body> -->
+
+<button mat-button (click) = "openDialog()">Создать заявку</button>
+
+<body>
+
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+    <ng-container matColumnDef="appnumber">
+      <th mat-header-cell *matHeaderCellDef> "№ заявки </th>
+      <td mat-cell *matCellDef="let element"> {{element.appnumber}} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Исполнители </th>
+      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="company">
+      <th mat-header-cell *matHeaderCellDef> Компания и номер договора </th>
+      <td mat-cell *matCellDef="let element"> {{element.company}} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="analysis">
+      <th mat-header-cell *matHeaderCellDef> Вид анализа </th>
+      <td mat-cell *matCellDef="let element"> {{element.analysis}} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="registrationdate">
+      <th mat-header-cell *matHeaderCellDef> Дата регистрации </th>
+      <td mat-cell *matCellDef="let element"> {{element.registrationdate}} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="completiondate">
+      <th mat-header-cell *matHeaderCellDef> Дата планового завершения </th>
+      <td mat-cell *matCellDef="let element"> {{element.completiondate}} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="laboratory">
+      <th mat-header-cell *matHeaderCellDef> Лаборатория </th>
+      <td mat-cell *matCellDef="let element"> {{element.laboratory}} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef> Статус </th>
+      <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="report">
+      <th mat-header-cell *matHeaderCellDef> Отчет/Протокол </th>
+      <td mat-cell *matCellDef="let element"> {{element.report}} </td>
+    </ng-container>
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</body>
