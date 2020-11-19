@@ -8,6 +8,8 @@ import { TableComponent } from './table/table.component';
 import { InformationComponent } from './information/information.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+
 
 @NgModule({
   declarations: [
@@ -20,7 +22,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     AppRoutingModule,
     NoopAnimationsModule,
     MatTableModule,
-    MatDialogModule
+    MatDialogModule,
+    MatFormFieldModule
   ],
   providers: [],
   bootstrap: [AppComponent]

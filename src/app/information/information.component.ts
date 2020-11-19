@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Worker } from '../worker';
+
 
 @Component({
   selector: 'app-information',
@@ -7,7 +10,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InformationComponent implements OnInit {
 
-  constructor() { }
+  sample = 2;
+
+  
+  constructor(
+    public dialogRef: MatDialogRef<InformationComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: Worker) {}
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
 
   ngOnInit(): void {
   }

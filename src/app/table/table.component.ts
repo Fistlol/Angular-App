@@ -1,7 +1,7 @@
 import { InformationComponent } from './../information/information.component';
-import { MatDialog } from '@angular/material/dialog';
 import { Component, OnInit } from '@angular/core';
 import { Worker } from '../worker';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-table',
@@ -169,7 +169,9 @@ export class TableComponent implements OnInit {
 
   openDialog(): void {
     const dialogRef = this.dialog.open(InformationComponent, {
-      width: '250px',
+      width: '1500px',
+      height: '880px',
+      
     });
 
     dialogRef.afterClosed().subscribe(result => {

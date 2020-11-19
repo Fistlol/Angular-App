@@ -1,0 +1,123 @@
+p {
+    clear: both;
+}
+
+.close {
+    float: right;
+    margin: 10px 10px 0 0;
+}
+
+.plus {
+    margin-left: 65px;
+    margin-right: 10px;
+}
+
+.minus {
+    margin-left: 10px;
+}
+
+.book {
+    position: absolute;
+    padding-top: 15px;
+    outline: none;
+    right: 0px;
+    padding-right: 5px;
+}
+
+
+
+.date {
+    position: absolute;
+    padding-top: 15px;
+    outline: none;
+    right: 0px;
+    padding-right: 5px;
+}
+
+.main-title {
+    color: #fff;
+    background: #6C899E;
+    border-radius: 3px 3px 0px 0px;
+    width: 100%;
+    height: 50px;
+    padding-top: 10px;
+}
+
+span {
+    width: 50px;
+}
+
+.clear {
+    clear: left;
+    text-align: center;
+}
+
+.left-column {
+    float: left;
+    width: 400px;
+    margin-right: 20px;
+}
+
+.right-column {
+    padding-left: 15px;
+    float: left;
+    width: 750px;
+    
+}
+
+input { 
+    margin-bottom: 15px;
+    height: 40px;
+    float: right;
+    width: 500px;
+}
+
+.left-input {
+    width: 250px;
+}
+
+.long {
+    width: 290px;
+}
+
+.small {
+    width: 100px;
+}
+
+.container-left {
+    width: 300px;
+    margin-right: 50px;
+}
+
+.container-right {
+    width: 700px;
+}
+
+.title {
+    background: #E2EAF0;
+    border-radius: 2px;
+    width: 220px;
+    height: 40px;
+}
+
+.true {
+    background-color: #2F80ED;
+    color: #fff;
+    margin-right: 10px;
+    border: 1px solid #2F80ED;
+    box-sizing: border-box;
+    border-radius: 2px;
+    height: 36px;
+    width: 138px;
+}
+
+.false {
+    background-color: #fff;
+    color: #0052B0;
+    margin-right: 10px;
+    border: 1px solid #2F80ED;
+    box-sizing: border-box;
+    border-radius: 2px;
+    height: 36px;
+    width: 138px;
+}

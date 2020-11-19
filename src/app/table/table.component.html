@@ -1,25 +1,6 @@
-<!-- <body>
-
-  <button class = "button-add" (click)="openModal()">Создать заявку</button>
-
-  <table id = "users">
-    <tr>
-      <th *ngFor = "let column of headers">
-        {{column}}
-      </th>
-    </tr>
-
-    <tr *ngFor = "let row of rows">
-      <td *ngFor = "let column of headers">
-        {{row[column]}}
-      </td>
-    </tr>
-  </table>
-</body> -->
-
-<button mat-button (click) = "openDialog()">Создать заявку</button>
-<p>Hello!</p>
 <body>
+  <button mat-button (click) = "openDialog()">Создать заявку</button>
+
 
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
