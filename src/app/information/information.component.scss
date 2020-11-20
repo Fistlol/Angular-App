@@ -1,103 +1,217 @@
 p {
     clear: both;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    
+}
+
+* {
+    font-size: 14px;
+    line-height: 16px;
+}
+
+div .main-content {
+    padding-left: 20px;
 }
 
 .close {
+    width: 16px;
+    height: 16px;
     float: right;
-    margin: 10px 10px 0 0;
-}
-
-.plus {
-    margin-left: 65px;
-    margin-right: 10px;
-}
-
-.minus {
-    margin-left: 10px;
+    margin: 1px 18px 0 0;
+    justify-content: flex-end;
 }
 
 .book {
     position: absolute;
-    padding-top: 15px;
+    padding-top: 11px;
     outline: none;
     right: 0px;
-    padding-right: 5px;
+    padding-right: 11px;
 }
-
-
 
 .date {
     position: absolute;
-    padding-top: 15px;
+    padding: 9px 10px 0 0;
     outline: none;
     right: 0px;
-    padding-right: 5px;
+}
+
+button {
+    padding: 0;
+}
+
+img {
+    .download {
+        position: absolute;
+        width: 19px;
+        height: 19px;
+        padding: 8px 12px 7px 15px;
+    }
 }
 
 .main-title {
     color: #fff;
     background: #6C899E;
     border-radius: 3px 3px 0px 0px;
-    width: 100%;
-    height: 50px;
-    padding-top: 10px;
+    width: auto;
+    height: 38px;
+    padding-top: 18px;
+    padding-left: 20px;
+    font-size: 18px;
+    font-weight: 500;
 }
 
-span {
-    width: 50px;
+.main-content {
+    height: 650px;
+    background-color: #E2EAF0;
 }
 
 .clear {
     clear: left;
     text-align: center;
+    margin-top: 30px;
 }
 
 .left-column {
     float: left;
-    width: 400px;
+    width: 424px;
+    height: 705px;
+    margin-left: 20px;
     margin-right: 20px;
 }
 
 .right-column {
     padding-left: 15px;
     float: left;
-    width: 750px;
-    
+    width: 837px;
+    height: 700px;    
 }
 
 input { 
-    margin-bottom: 15px;
-    height: 40px;
+    height: 34px;
+    width: 322px;
     float: right;
-    width: 500px;
+    padding-left: 12px;
+    background: #FFFFFF;
+    border: 0.8px solid #AFBEC9;
+    border-radius: 2px;
+}
+
+.star {
+    color: red;
+}
+
+.line {
+    position: absolute;
+    border: 0.8px solid #AFBEC9;
+}
+
+.left-p {
+    width: 115px;
+}
+
+.right-p {
+    width: 200px;
 }
 
 .left-input {
-    width: 250px;
+    width: 230px;
 }
 
 .long {
-    width: 290px;
+    width: 406px;
+}
+
+.right-input {
+    width: 322px;
+}
+
+.data-input {
+    width: 210px;
+}
+
+hr {
+    position: relative;
+    width: 422px;
+    height: 0px;
+    border: 0.8px solid #AFBEC9;
+    margin: 5px 0 15px;
 }
 
 .small {
     width: 100px;
 }
 
+:placeholder-shown {
+    color: #C8C8C8;
+}
+
 .container-left {
-    width: 300px;
-    margin-right: 50px;
+    width: 424px;
+    padding-left: 20px;
+    margin-right: 20px;
+    display: flex;
+    flex-direction: column;
+    margin-top: 19px;
+    .row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 15px;
+        .input-block {
+            position: relative;
+            .download-button {
+                width: 180px;
+                text-decoration: none;
+                border-style: solid none;
+                border: 0.8px solid #AFBEC9;
+                box-sizing: border-box;
+                border-radius: 2px;
+                background-color: #fff;
+                height: 34px;
+                color: #6C899E;
+            }
+        }
+    }
 }
 
 .container-right {
-    width: 700px;
+    width: 770px;
+    margin-left: 20px;
+    display: flex;
+    flex-direction: column;
+    margin-top: 19px;
+    .row {
+        display: flex;
+        justify-content: flex-start;
+            align-items: center;
+        margin-bottom: 15px;
+        .input-block {
+            position: relative;
+            .download-button {
+                width: 180px;
+                text-decoration: none;                    border-style: solid none;
+                border: 0.8px solid #AFBEC9;
+                box-sizing: border-box;
+                border-radius: 2px;
+                background-color: #fff;
+                height: 34px;                    color: #6C899E;
+            }
+        }
+    }
 }
 
 .title {
     background: #E2EAF0;
     border-radius: 2px;
     width: 220px;
-    height: 40px;
+    height: 20px;
+    margin-bottom: 0px;
+    text-align: center;
+    padding: 10px 0;
+    font-size: 13px;
+    line-height: 15px;
 }
 
 .true {

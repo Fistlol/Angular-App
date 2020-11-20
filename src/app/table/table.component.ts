@@ -169,7 +169,7 @@ export class TableComponent implements OnInit {
 
   openDialog(): void {
     const dialogRef = this.dialog.open(InformationComponent, {
-      width: '1500px',
+      width: '1348px',
       height: '880px',
       
     });
