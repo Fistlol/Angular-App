@@ -9,6 +9,7 @@ import { InformationComponent } from './information/information.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatTabsModule } from '@angular/material/tabs';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     NoopAnimationsModule,
     MatTableModule,
     MatDialogModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatTabsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

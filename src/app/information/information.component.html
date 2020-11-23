@@ -1,154 +1,279 @@
 <!-- <img src="./assets/icons/close.svg" alt="">
 <input type="text"> -->
-<div class = "main-title">
-  Заявка - №1
-    <img class = "close" src="./assets/icons/close.svg" alt="" (click)="onNoClick()">
-  
+<div class="main-title">
+  <p class="application">Заявка - №1</p>
+    <img class = "close" src="./assets/icons/close.svg" alt="" (click)="onNoClick()">  
 </div>
-<div>
-  <div class="left-column">
-    <mat-form-field class="container-left">
+
+<div class="main-container">
+  <div class="container-left">
+    <div class="row">
+      <div class="input-block">
+        <input class="long" placeholder="Наименование заказчика" matInput='data.company'>
+        <img class="book" src="./assets/icons/book.svg" alt="" (click)="onNoClick()">
+      </div>
+    </div>
+    <div class="row">
+      <p class="left-p">
+        БИН
+      </p>
+      <input class="left-input" placeholder="2112321246674" matInput='data.company'>
+    </div>
+    <div class="row">
+      <p class="left-p">
+        № договора
+      </p> 
+      <input class="left-input" placeholder="1223" matInput='data.company'>
+    </div>
+    <div class="row">
+      <p class="left-p">
+      Дата планового завершения
+      </p>
+      <div class="input-block">
+        <input class="left-input" placeholder="10 ЯНВ 2019 г." matInput='data.company'>
+        <img class="date" src="./assets/icons/date.svg" alt="" (click)="onNoClick()">
+      </div>
+    </div>
+    <hr>
+    <div class="row">
+      <p class="download-p">
+        Приложения
+      </p>
+      <div class="input-block">
+        <button class="download-button">
+          <img class="download" src="./assets/icons/download.svg" alt="" >
+          <p class="button-p">Прикрепить файл</p>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="container-right">
+    <div class="tab-title">
+      <p class="title">
+        Номер пробы 1
+      </p>
+    </div>
+
+
+    <div>
+      <button mat-raised-button class="example-add-tab-button" (click)="addTab(selectAfterAdding.checked)">
+        Add new tab
+      </button>
+    </div>
+
+    <mat-tab-group [selectedIndex]="selected.value" (selectedIndexChange)="selected.setValue($event)">
+      <mat-tab *ngFor="let tab of tabs; let index = index" [label]="tab">
+        <div class="main-content">
+          <div class="row">
+            <p class="right-p">
+              Месторождение
+            </p>
+            <div class="input-block">
+              <input class="right-input" placeholder="с. Бесагалы" matInput='data.company'>
+              <img class="book" src="./assets/icons/book.svg" alt="" (click)="onNoClick()">
+            </div>
+          </div>
+          <div class="row">
+            <p class="right-p">
+              № скважины
+            </p>
+            <input class="right-input" placeholder="191920" matInput='data.company'>
+          </div>
+          <div class="row">
+            <p class="right-p">
+              Количество проб
+            </p>
+            <div class="switch">
+              <img class="plus" src="./assets/icons/plus.svg" alt="" (click)="onNoClick()">
+              <p class="p-number">2</p>
+              <img class="minus" src="./assets/icons/minus.svg" alt="" (click)="onNoClick()">
+            </div>
+          </div>
+          <div class="row">
+            <p class="right-p">
+              Тип пробоотборника
+            </p>
+            <div class="input-block">
+              <input class="right-input" matInput='data.company'>
+              <img class="book" src="./assets/icons/book.svg" alt="" (click)="onNoClick()">
+            </div>
+          </div>
+          <div class="row">
+            <p class="right-p">
+              Интервал перфорации
+            </p>
+            <div class="interval">
+              <input class="small" placeholder="345" matInput='data.company'>
+              <p class="p-minus">-</p>
+              <input class="small" placeholder="445" matInput='data.company'>     
+              <img class="plus" src="./assets/icons/plus.svg" alt="" (click)="onNoClick()">
+              <p class="p-interval">Добавить интервал перфорации</p>
+            </div>
+          </div>
+          <div class="row">
+            <p class="right-p">
+              Глубина отбора
+            </p>
+            <input class="right-input" placeholder="191920" matInput='data.company'>
+          </div>
+          <div class="row">
+            <p class="right-p">
+              Температура (&deg;C)
+            </p>
+            <input class="right-input" matInput='data.company'>
+          </div>
+          <div class="row">
+            <p class="right-p">
+              Давление (MPa)
+            </p>
+            <input class="right-input" matInput='data.company'>
+          </div>
+          <div class="row">
+            <p class="right-p">
+              Дата отбора
+            </p>
+            <div class="input-block">
+              <input class="data-input" placeholder="10 ЯНВ 2019 г." matInput='data.company'>
+              <img class="date" src="./assets/icons/date.svg" alt="" (click)="onNoClick()">
+            </div>
+          </div>
+          <div class="row">
+            <p class="right-p">
+              Дата поступления
+            </p>
+            <div class="input-block">
+              <input class="data-input" placeholder="22 ЯНВ 2019 г." matInput='data.company'>
+              <img class="date" src="./assets/icons/date.svg" alt="" (click)="onNoClick()">
+            </div>
+          </div>
+          <div class="row">
+            <p class="right-p">
+              ID номер пробы
+            </p>
+            <div class="input-block">
+              <input class="right-input" matInput='data.company'>
+              <button class="scan-button">
+                <p class="scan-p">Сканировать</p>
+              </button>
+            </div>
+          </div>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+
+
+    <!-- <div class="main-content">
       <div class="row">
+        <p class="right-p">
+          Месторождение
+        </p>
         <div class="input-block">
-          <input class = "left-input long" placeholder="Наименование заказчика" matInput='data.company'>
-          <img class = "book" src="./assets/icons/book.svg" alt="" (click)="onNoClick()">
+          <input class="right-input" placeholder="с. Бесагалы" matInput='data.company'>
+          <img class="book" src="./assets/icons/book.svg" alt="" (click)="onNoClick()">
         </div>
       </div>
       <div class="row">
-        <p class = "left-p">
-          БИН&nbsp;<span class="star">*</span>
+        <p class="right-p">
+          № скважины
         </p>
-        <input class = "left-input" placeholder="2112321246674" matInput='data.company'>
+        <input class="right-input" placeholder="191920" matInput='data.company'>
       </div>
       <div class="row">
-        <p class = "left-p">
-          № договора&nbsp;<span class="star">*</span>
-        </p> 
-        <input class = "left-input" placeholder="1223" matInput='data.company'>
-      </div>
-      <div class="row">
-        <p class = "left-p">
-        Дата планового завершения&nbsp;<span class="star">*</span>
+        <p class="right-p">
+          Количество проб
         </p>
-        <div class="input-block">
-          <input class = "left-input" placeholder="10 ЯНВ 2019 г." matInput='data.company'>
-          <img class = "date" src="./assets/icons/date.svg" alt="" (click)="onNoClick()">
+        <div class="switch">
+          <img class="plus" src="./assets/icons/plus.svg" alt="" (click)="onNoClick()">
+          <p class="p-number">2</p>
+          <img class="minus" src="./assets/icons/minus.svg" alt="" (click)="onNoClick()">
         </div>
       </div>
-      <hr>
       <div class="row">
-        <p class="left-p">
-          Приложения
+        <p class="right-p">
+          Тип пробоотборника
         </p>
         <div class="input-block">
-          <button class = "download-button">
-            <img class = "download" src="./assets/icons/download.svg" alt="" >
-            Прикрепить файл
+          <input class="right-input" matInput='data.company'>
+          <img class="book" src="./assets/icons/book.svg" alt="" (click)="onNoClick()">
+        </div>
+      </div>
+      <div class="row">
+        <p class="right-p">
+          Интервал перфорации
+        </p>
+        <div class="interval">
+          <input class="small" placeholder="345" matInput='data.company'>
+          <p class="p-minus">-</p>
+          <input class="small" placeholder="445" matInput='data.company'>     
+          <img class="plus" src="./assets/icons/plus.svg" alt="" (click)="onNoClick()">
+          <p class="p-interval">Добавить интервал перфорации</p>
+        </div>
+      </div>
+      <div class="row">
+        <p class="right-p">
+          Глубина отбора
+        </p>
+        <input class="right-input" placeholder="191920" matInput='data.company'>
+      </div>
+      <div class="row">
+        <p class="right-p">
+          Температура (&deg;C)
+        </p>
+        <input class="right-input" matInput='data.company'>
+      </div>
+      <div class="row">
+        <p class="right-p">
+          Давление (MPa)
+        </p>
+        <input class="right-input" matInput='data.company'>
+      </div>
+      <div class="row">
+        <p class="right-p">
+          Дата отбора
+        </p>
+        <div class="input-block">
+          <input class="data-input" placeholder="10 ЯНВ 2019 г." matInput='data.company'>
+          <img class="date" src="./assets/icons/date.svg" alt="" (click)="onNoClick()">
+        </div>
+      </div>
+      <div class="row">
+        <p class="right-p">
+          Дата поступления
+        </p>
+        <div class="input-block">
+          <input class="data-input" placeholder="22 ЯНВ 2019 г." matInput='data.company'>
+          <img class="date" src="./assets/icons/date.svg" alt="" (click)="onNoClick()">
+        </div>
+      </div>
+      <div class="row">
+        <p class="right-p">
+          ID номер пробы
+        </p>
+        <div class="input-block">
+          <input class="right-input" matInput='data.company'>
+          <button class="scan-button">
+            <p class="scan-p">Сканировать</p>
           </button>
         </div>
       </div>
-    </mat-form-field>
-  </div>
-  <div class = "right-column">
-    <mat-form-field class = "container-right">
-      <p class = "title">
-        <span>Номер пробы 1</span>
-      </p>
-      <div class = "main-content">
-        <div class="row">
-          <p class="right-p">
-            Месторождение
-          </p>
-          <div class="input-block">
-            <input class = "right-input" placeholder="с. Бесагалы" matInput='data.company'>
-            <img class = "book" src="./assets/icons/book.svg" alt="" (click)="onNoClick()">
-          </div>
-        </div>
-        <div class="row">
-          <p class="right-p">
-            № скважины
-          </p>
-          <input class = "right-input" placeholder="191920" matInput='data.company'>
-        </div>
-        <div class="row">
-          <p class="right-p">
-            Количество проб
-          </p>
-          <div>
-            <img class = "plus" src="./assets/icons/plus.svg" alt="" (click)="onNoClick()">
-            &nbsp; - &nbsp;
-            <img class = "minus" src="./assets/icons/minus.svg" alt="" (click)="onNoClick()">
-          </div>
-        </div>
-        <div class="row">
-          <p class="right-p">
-            Тип пробоотборника
-          </p>
-          <div class="input-block">
-            <input class = "right-input" matInput='data.company'>
-            <img class = "book" src="./assets/icons/book.svg" alt="" (click)="onNoClick()">
-          </div>
-        </div>
-        <div class="row">
-          <p class="right-p">
-            Интервал перфорации
-          </p>
-          <div>
-            <input class = "small" placeholder="445" matInput='data.company'>
-            <input class = "small" placeholder="345" matInput='data.company'>
-            
-          </div>
-        </div>
-        <div class="row">
-          <p class="right-p">
-            Глубина отбора
-          </p>
-          <input class = "right-input" placeholder="191920" matInput='data.company'>
-        </div>
-        <div class="row">
-          <p class="right-p">
-            Температура (&deg;C)
-          </p>
-          <input class = "right-input" matInput='data.company'>
-        </div>
-        <div class="row">
-          <p class="right-p">
-            Давление (MPa)
-          </p>
-          <input class = "right-input" matInput='data.company'>
-        </div>
-        <div class="row">
-          <p class="right-p">
-            Дата отбора
-          </p>
-          <div class="input-block">
-            <input class = "data-input" placeholder="10 ЯНВ 2019 г." matInput='data.company'>
-            <img class = "date" src="./assets/icons/date.svg" alt="" (click)="onNoClick()">
-          </div>
-        </div>
-        <div class="row">
-          <p class="right-p">
-            Дата поступления
-          </p>
-          <div class="input-block">
-            <input class = "data-input" placeholder="22 ЯНВ 2019 г." matInput='data.company'>
-            <img class = "date" src="./assets/icons/date.svg" alt="" (click)="onNoClick()">
-          </div>
-        </div>
-        <div class="row">
-          <p class="right-p">
-            ID номер пробы
-          </p>
-          <input class = "right-input" matInput='data.company'>
-        </div>
-
-      </div>
-
-      <div class = "clear" mat-dialog-actions>
-        <button class = "true" mat-button [mat-dialog-close] cdkFocusInitial>Создать</button>
-        <button class = "false" mat-button (click)="onNoClick()">Отменить</button>
-      </div>
-
-    </mat-form-field>
+    </div> -->
   </div>
 </div>
+
+<div class="clear">
+  <button class="true">Создать</button>
+  <button class="false" mat-button (click)="onNoClick()">Отменить</button>
+</div>
+
+<!-- <div class="row">
+  <p class="left-p">
+    Приложения
+  </p>
+  <div class="input-block">
+    <button class="download-button">
+      <img class="download" src="./assets/icons/download.svg" alt="" >
+      <p class="button-p">Прикрепить файл</p>
+    </button>
+  </div>
+</div> -->
