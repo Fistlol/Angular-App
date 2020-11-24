@@ -11,16 +11,19 @@ import { Worker } from '../worker';
   styleUrls: ['./information.component.scss']
 })
 export class InformationComponent implements OnInit {
-  tabs = ['Номер пробы 1'];
+  number = 1;
+  tabs = ['Номер пробы ' + this.number];
+  
   selected = new FormControl(0);
-  sample = 2;
 
   addTab(selectAfterAdding: boolean) {
-    this.tabs.push('New');
+    this.number++;
+    this.tabs.push('Номер пробы ' + this.number);
+  }
 
-    if (selectAfterAdding) {
-      this.selected.setValue(this.tabs.length - 1);
-    }
+  removeTab(index: number) {
+    this.tabs.splice(index, 1);
+    this.number--;
   }
   
   constructor(

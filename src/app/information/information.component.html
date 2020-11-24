@@ -49,21 +49,32 @@
   </div>
 
   <div class="container-right">
-    <div class="tab-title">
+    <!-- <div class="tab-title">
       <p class="title">
         Номер пробы 1
       </p>
-    </div>
+    </div> -->
 
 
-    <div>
-      <button mat-raised-button class="example-add-tab-button" (click)="addTab(selectAfterAdding.checked)">
-        Add new tab
+    <!-- <div>
+      <button mat-raised-button class="example-add-tab-button" (click)="addTab()" src="./assets/icons/plus.svg">
+        <img class="add" src="./assets/icons/plus.svg" alt="">
       </button>
-    </div>
+    </div> -->
 
-    <mat-tab-group [selectedIndex]="selected.value" (selectedIndexChange)="selected.setValue($event)">
-      <mat-tab *ngFor="let tab of tabs; let index = index" [label]="tab">
+    <mat-tab-group>
+      <mat-tab class="tabs" *ngFor="let tab of tabs; let index = index" [label]="tab">
+        <button mat-raised-button class="example-delete-tab-button" [disabled]="tabs.length === 1" (click)="removeTab(index)">
+          <img class = "gray-close" src="./assets/icons/gray-close.svg" alt="">
+        </button>
+        <div>
+          <button mat-raised-button class="example-add-tab-button" (click)="addTab()">
+            <img class="add" src="./assets/icons/plus.svg" alt="">
+          </button>
+        </div>
+        <!-- <button mat-raised-button class="example-delete-tab-button" [disabled]="tabs.length === 1" (click)="removeTab(index)">
+          <img class = "gray-close" src="./assets/icons/gray-close.svg" alt="">
+        </button> -->
         <div class="main-content">
           <div class="row">
             <p class="right-p">
