@@ -4,8 +4,8 @@
     line-height: 16px;
 }
 
-div .main-content {
-    padding-left: 20px;
+button {
+    padding: 0;
 }
 
 .main-container {
@@ -13,8 +13,6 @@ div .main-content {
     flex: 1;
     padding: 20px;
 }
-
-
 
 img {
     &.close {
@@ -54,26 +52,6 @@ img {
     }
 }
 
-button {
-    padding: 0;
-    margin: 0;
-    background: #fff;
-    border: 0;
-    &.add {
-        width: 20px;
-        height: 20px;
-        background-color: #fff;
-        border: 0;
-        margin: 0;
-    }
-    &.gray-close {
-        width: 12px;
-        height: 12px;
-        background-color: #fff;
-        border: 0;
-    }
-}
-
 .main-title {
     position: relative;
     background: #6C899E;
@@ -95,6 +73,7 @@ button {
 .main-content {
     height: 650px;
     background-color: #E2EAF0;
+    
 }
 
 .clear {
@@ -123,7 +102,7 @@ input {
         width: 86px;
     }
     &.long {
-        width: 100%;
+        width: 486px;
     }
 }
 
@@ -141,6 +120,7 @@ p {
     }
     &.right-p {
         width: 194px;
+        margin-left: 20px;
     }
     &.button-p {
         margin: 0;
@@ -174,7 +154,7 @@ p {
 
 hr {
     position: relative;
-    width: 422px;
+    width: 498px;
     height: 0px;
     border: 0.8px solid #AFBEC9;
     margin: 5px 0 15px;
@@ -189,7 +169,6 @@ hr {
         justify-content: space-between;
         align-items: center;
         margin-bottom: 15px;
-        width: 100%;
         .input-block {
             position: relative;
             .download-button {

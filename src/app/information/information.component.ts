@@ -16,9 +16,14 @@ export class InformationComponent implements OnInit {
   
   selected = new FormControl(0);
 
-  addTab(selectAfterAdding: boolean) {
+  nameControl: FormControl;
+
+  addTab() {
     this.number++;
     this.tabs.push('Номер пробы ' + this.number);
+
+    this.selected.setValue(this.tabs.length - 1);
+    
   }
 
   removeTab(index: number) {
@@ -35,6 +40,8 @@ export class InformationComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.nameControl = new FormControl('');
+
   }
 
 }
