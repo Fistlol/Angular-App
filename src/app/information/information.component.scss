@@ -1,11 +1,23 @@
-* {
-    font-family: Roboto;
-    font-size: 14px;
-    line-height: 16px;
-}
-
 button {
+    &:hover {
+        cursor: pointer;
+    }
+    background: #fff;
     padding: 0;
+    border: none;
+    &.button-add {
+        width: 20px;
+        height: 20px;
+        display: flex;
+        justify-content: flex-end;
+    }
+    &.button-close {
+        width: 12px;
+        height: 12px;
+        display: flex;
+        background: #E2EAF0;
+        margin-left: 20px;
+    }
 }
 
 .main-container {
@@ -15,6 +27,9 @@ button {
 }
 
 img {
+    &:hover {
+        cursor: pointer;
+    }
     &.close {
         position: absolute;
         top: 50%;
@@ -43,7 +58,6 @@ img {
     &.plus {
         width: 20px;
         height: 20px;
-        margin-top: 11px;
     }
     &.minus {
         width: 20px;
@@ -56,6 +70,7 @@ img {
     position: relative;
     background: #6C899E;
     height: 53px;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
     .application {
         margin: 0;
         position: absolute;
@@ -71,9 +86,7 @@ img {
 }
 
 .main-content {
-    height: 650px;
-    background-color: #E2EAF0;
-    
+    height: 650px;    
 }
 
 .clear {
@@ -102,14 +115,14 @@ input {
         width: 86px;
     }
     &.long {
-        width: 486px;
+        width: 466px;
     }
 }
 
 p {
     color: #000;
     &.left-p {
-        width: 115px;
+        width: 130px;
     }
     &.left-p:after {
         content: " *";
@@ -154,21 +167,25 @@ p {
 
 hr {
     position: relative;
-    width: 498px;
+    width: 478px;
     height: 0px;
     border: 0.8px solid #AFBEC9;
     margin: 5px 0 15px;
 }
 
 .container-left {
-    width: 500px;
+    width: 480px;
     display: flex;
     flex-direction: column;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
     .row {
         display: flex;
         justify-content: space-between;
         align-items: center;
         margin-bottom: 15px;
+        &:last-child {
+            margin-bottom: 0;
+        }
         .input-block {
             position: relative;
             .download-button {
@@ -191,6 +208,7 @@ hr {
     flex-direction: column;
     flex: 1;
     margin-left: 20px;
+    overflow: hidden;
     .tab-title {
         background: #E2EAF0;
         width: 220px;
@@ -200,8 +218,18 @@ hr {
         justify-content: flex-start;
         align-items: center;
         margin-bottom: 15px;
+        &:last-child {
+            margin-bottom: 0;
+        }
         .switch {
             display: flex;
+            align-items: center;
+            .plus {
+                margin: 0;
+            }
+            .minus {
+                margin: 0;
+            }
             .p-number {
                 display: flex;
                 justify-content: center;
@@ -210,13 +238,19 @@ hr {
         }
         .interval {
             display: flex;
+            align-items: center;
             .p-minus {
                 display: flex;
                 justify-content: center;
                 width: 20px;
+                margin: 0;
+                align-items: center;
+                height: 40px;
             }
             .plus {
-                margin-left: 20px;
+                width: 20px;
+                height: 20px;
+                margin-left: 15px;
             }
             .p-interval {
                 margin-left: 10px;
@@ -249,6 +283,10 @@ hr {
             }
         }
     }
+}
+
+.background {
+    background-color: #E2EAF0;
 }
 
 .true {

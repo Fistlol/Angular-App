@@ -1,8 +1,29 @@
 /* You can add global styles to this file, and also import other style files */
 
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
+
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { margin: 0;}
 
 .mat-dialog-container {
     padding: 0px !important;
+}
+
+
+.mat-tab-header {
+    width: 700px;
+}
+
+.mat-tab-label {
+    padding: 0;
+}
+
+.mat-ripple {
+    background-color: #E2EAF0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 13px;
+    line-height: 15px;
+    border: 0.8px solid #AFBEC9;
 }

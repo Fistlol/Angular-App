@@ -23,17 +23,7 @@ export class TableComponent implements OnInit {
       completiondate: "30 ОКТ 2019",
       laboratory: "ЛИПФ",
       status: "Новая",
-      report: "Отчет\nПротокол\nИсследования",
-      bin: 0,
-      numberofContract: 0,
-      field: "",
-      numberOfWell: 0,
-      numberOfSample: 0,
-      typeOfSampler: "",
-      intervalOfPerforation: 0,
-      depth: 0,
-      pressure: "",
-      IDOfSample: 0
+      report: "Отчет\nПротокол\nИсследования"
     },
     {
       appnumber: "НТ - 30",
@@ -44,17 +34,7 @@ export class TableComponent implements OnInit {
       completiondate: "30 ОКТ 2019",
       laboratory: "ЛИНГиВ",
       status: "Идет исследование",
-      report: "Отчет\nПротокол\nИсследования",
-      bin: 0,
-      numberofContract: 0,
-      field: "",
-      numberOfWell: 0,
-      numberOfSample: 0,
-      typeOfSampler: "",
-      intervalOfPerforation: 0,
-      depth: 0,
-      pressure: "",
-      IDOfSample: 0
+      report: "Отчет\nПротокол\nИсследования"
     },
     {
       appnumber: "IОР - 66\nНТ - 30",
@@ -65,17 +45,7 @@ export class TableComponent implements OnInit {
       completiondate: "30 ОКТ 2019",
       laboratory: "ЛИПФ -> ЛИНГиВ",
       status: "Новая",
-      report: "Отчет\nПротокол\nИсследования",
-      bin: null,
-      numberofContract: 0,
-      field: "",
-      numberOfWell: 0,
-      numberOfSample: 0,
-      typeOfSampler: "",
-      intervalOfPerforation: 0,
-      depth: 0,
-      pressure: "",
-      IDOfSample: 0
+      report: "Отчет\nПротокол\nИсследования"
     },
     {
       appnumber: "IОР - 66\nНТ - 30",
@@ -86,17 +56,7 @@ export class TableComponent implements OnInit {
       completiondate: "30 ОКТ 2019",
       laboratory: "ЛИПФ -> ЛИНГиВ",
       status: "Новая",
-      report: "Отчет\nПротокол\nИсследования",
-      bin: 0,
-      numberofContract: 0,
-      field: "",
-      numberOfWell: 0,
-      numberOfSample: 0,
-      typeOfSampler: "",
-      intervalOfPerforation: 0,
-      depth: 0,
-      pressure: "",
-      IDOfSample: 0
+      report: "Отчет\nПротокол\nИсследования"
     },
     {
       appnumber: "НТ - 30",
@@ -107,17 +67,7 @@ export class TableComponent implements OnInit {
       completiondate: "30 ОКТ 2019",
       laboratory: "ЛИНГиВ",
       status: "На доработке",
-      report: "Отчет\nПротокол\nИсследования",
-      bin: 0,
-      numberofContract: 0,
-      field: "",
-      numberOfWell: 0,
-      numberOfSample: 0,
-      typeOfSampler: "",
-      intervalOfPerforation: 0,
-      depth: 0,
-      pressure: "",
-      IDOfSample: 0
+      report: "Отчет\nПротокол\nИсследования"
     },
     {
       appnumber: "НТ - 30",
@@ -128,17 +78,7 @@ export class TableComponent implements OnInit {
       completiondate: "30 ОКТ 2019",
       laboratory: "ЛИНГиВ",
       status: "На доработке",
-      report: "Отчет\nПротокол\nИсследования",
-      bin: 0,
-      numberofContract: 0,
-      field: "",
-      numberOfWell: 0,
-      numberOfSample: 0,
-      typeOfSampler: "",
-      intervalOfPerforation: 0,
-      depth: 0,
-      pressure: "",
-      IDOfSample: 0
+      report: "Отчет\nПротокол\nИсследования"
     },
     {
       appnumber: "НТ - 30",
@@ -149,17 +89,7 @@ export class TableComponent implements OnInit {
       completiondate: "30 ОКТ 2019",
       laboratory: "ЛИНГиВ",
       status: "Завершен/отчет\nНе согласовано",
-      report: "Отчет\nПротокол\nИсследования",
-      bin: 0,
-      numberofContract: 0,
-      field: "",
-      numberOfWell: 0,
-      numberOfSample: 0,
-      typeOfSampler: "",
-      intervalOfPerforation: 0,
-      depth: 0,
-      pressure: "",
-      IDOfSample: 0
+      report: "Отчет\nПротокол\nИсследования"
     },
     {
       appnumber: "НТ - 30",
@@ -170,17 +100,7 @@ export class TableComponent implements OnInit {
       completiondate: "30 ОКТ 2019",
       laboratory: "ЛИНГиВ",
       status: "Идет исследование",
-      report: "Отчет\nПротокол\nИсследования",
-      bin: 0,
-      numberofContract: 0,
-      field: "",
-      numberOfWell: 0,
-      numberOfSample: 0,
-      typeOfSampler: "",
-      intervalOfPerforation: 0,
-      depth: 0,
-      pressure: "",
-      IDOfSample: 0
+      report: "Отчет\nПротокол\nИсследования"
     },
     {
       appnumber: "НТ - 30",
@@ -191,17 +111,7 @@ export class TableComponent implements OnInit {
       completiondate: "30 ОКТ 2019",
       laboratory: "ЛИНГиВ",
       status: "В лаборатории",
-      report: "Отчет\nПротокол\nИсследования",
-      bin: 0,
-      numberofContract: 0,
-      field: "",
-      numberOfWell: 0,
-      numberOfSample: 0,
-      typeOfSampler: "",
-      intervalOfPerforation: 0,
-      depth: 0,
-      pressure: "",
-      IDOfSample: 0
+      report: "Отчет\nПротокол\nИсследования"
     },
     {
       appnumber: "НТ - 30",
@@ -212,17 +122,7 @@ export class TableComponent implements OnInit {
       completiondate: "30 ОКТ 2019",
       laboratory: "ЛИНГиВ",
       status: "В лаборатории",
-      report: "Отчет\nПротокол\nИсследования",
-      bin: 0,
-      numberofContract: 0,
-      field: "",
-      numberOfWell: 0,
-      numberOfSample: 0,
-      typeOfSampler: "",
-      intervalOfPerforation: 0,
-      depth: 0,
-      pressure: "",
-      IDOfSample: 0
+      report: "Отчет\nПротокол\nИсследования"
     },
     {
       appnumber: "НТ - 30",
@@ -233,17 +133,7 @@ export class TableComponent implements OnInit {
       completiondate: "30 ОКТ 2019",
       laboratory: "ЛИНГиВ",
       status: "Завершен/отчет\nСогласовано",
-      report: "Отчет\nПротокол\nИсследования",
-      bin: 0,
-      numberofContract: 0,
-      field: "",
-      numberOfWell: 0,
-      numberOfSample: 0,
-      typeOfSampler: "",
-      intervalOfPerforation: 0,
-      depth: 0,
-      pressure: "",
-      IDOfSample: 0
+      report: "Отчет\nПротокол\nИсследования"
     },
     {
       appnumber: "НТ - 30",
@@ -254,17 +144,7 @@ export class TableComponent implements OnInit {
       completiondate: "30 ОКТ 2019",
       laboratory: "ЛИНГиВ",
       status: "Идет исследование",
-      report: "Отчет\nПротокол\nИсследования",
-      bin: 0,
-      numberofContract: 0,
-      field: "",
-      numberOfWell: 0,
-      numberOfSample: 0,
-      typeOfSampler: "",
-      intervalOfPerforation: 0,
-      depth: 0,
-      pressure: "",
-      IDOfSample: 0
+      report: "Отчет\nПротокол\nИсследования"
     },
     {
       appnumber: "НТ - 30",
@@ -275,17 +155,7 @@ export class TableComponent implements OnInit {
       completiondate: "30 ОКТ 2019",
       laboratory: "ЛИНГиВ",
       status: "Идет исследование",
-      report: "Отчет\nПротокол\nИсследования",
-      bin: 0,
-      numberofContract: 0,
-      field: "",
-      numberOfWell: 0,
-      numberOfSample: 0,
-      typeOfSampler: "",
-      intervalOfPerforation: 0,
-      depth: 0,
-      pressure: "",
-      IDOfSample: 0
+      report: "Отчет\nПротокол\nИсследования"
     }
   ];
 
