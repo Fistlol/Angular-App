@@ -1,22 +1,12 @@
 export interface Worker {
-    appnumber: string;
+    appNumber: string;
     name: string;
     company: string;
     analysis: string;
-    registrationdate: string;
-    completiondate: string;
+    registrationDate: Date;
+    completionDate: Date;
     laboratory: string;
     status: string;
-    report: string;
-    bin?: number;
-    numberofContract?: number;
-    field?: string;
-    numberOfWell?: number;
-    numberOfSample?: number;
-    typeOfSampler?: string;
-    intervalOfPerforation?: number;
-    depth?: number;
-    temperature?: number;
-    pressure?: string;
-    IDOfSample?: number;
+    bin: number;
+    numberOfContract: string;
   }

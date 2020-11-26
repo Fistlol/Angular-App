@@ -1,7 +1,11 @@
+import { Tester } from './../tester';
+import { Worker } from './../worker';
+import { Data } from '../data';
+import { important, secondary } from '../mainData';
 import { InformationComponent } from './../information/information.component';
 import { Component, OnInit } from '@angular/core';
-import { Worker } from '../worker';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
+
 
 @Component({
   selector: 'app-table',
@@ -10,172 +14,74 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 })
 
 export class TableComponent implements OnInit {
-
-  // headers = ["№ заявки", "Исполнители", "Компания и номер договора", "Вид анализа", "Дата регистрации", "Дата планового завершения", "Лаборатория", "Статус", "Отчет/Протокол"];
+  buttons = [{button: 'Отчет'}, {button: 'Протокол'}, {button: 'Исследования'}];
+  displayedColumns = ['appNumber', 'name', 'company', 'analysis', 'registrationDate', 'completionDate', 'laboratory', 'status', 'report'];
+  dataSource = important;
   
-  rows: Worker[] = [
-    {
-      appnumber: "IIДР - 65",
-      name: "Чечин И.И.,\nИванов А. А.",
-      company: 'АО ЭМГ\nНГДУ "Жайык МГ"',
-      analysis: "II ДР",
-      registrationdate: "3 МАР 2019",
-      completiondate: "30 ОКТ 2019",
-      laboratory: "ЛИПФ",
-      status: "Новая",
-      report: "Отчет\nПротокол\nИсследования"
-    },
-    {
-      appnumber: "НТ - 30",
-      name: "Ню В. П.",
-      company: 'АО ЭМГ\nНГДУ "Кайнармунайгаз"',
-      analysis: "Неполный физическо-химический анализ",
-      registrationdate: "9 МАР 2019",
-      completiondate: "30 ОКТ 2019",
-      laboratory: "ЛИНГиВ",
-      status: "Идет исследование",
-      report: "Отчет\nПротокол\nИсследования"
-    },
-    {
-      appnumber: "IОР - 66\nНТ - 30",
-      name: "Распределить",
-      company: 'АО ЭМГ\nНГДУ "Жайык М"',
-      analysis: "I ОР",
-      registrationdate: "3 МАР 2019",
-      completiondate: "30 ОКТ 2019",
-      laboratory: "ЛИПФ -> ЛИНГиВ",
-      status: "Новая",
-      report: "Отчет\nПротокол\nИсследования"
-    },
-    {
-      appnumber: "IОР - 66\nНТ - 30",
-      name: "Распределить",
-      company: 'АО ЭМГ\nНГДУ "Жайык МГ"',
-      analysis: "II ДР",
-      registrationdate: "3 МАР 2019",
-      completiondate: "30 ОКТ 2019",
-      laboratory: "ЛИПФ -> ЛИНГиВ",
-      status: "Новая",
-      report: "Отчет\nПротокол\nИсследования"
-    },
-    {
-      appnumber: "НТ - 30",
-      name: "Иванова В. В.",
-      company: 'АО ЭМГ\nНГДУ "Жайык МГ"',
-      analysis: "Полный физическо-химический анализ",
-      registrationdate: "3 МАР 2019",
-      completiondate: "30 ОКТ 2019",
-      laboratory: "ЛИНГиВ",
-      status: "На доработке",
-      report: "Отчет\nПротокол\nИсследования"
-    },
-    {
-      appnumber: "НТ - 30",
-      name: "Ню В. П.,\nКим А. А.",
-      company: 'АО ЭМГ\nНГДУ "Кайнармунайгаз"',
-      analysis: "Полный физическо-химический анализ",
-      registrationdate: "9 МАР 2019",
-      completiondate: "30 ОКТ 2019",
-      laboratory: "ЛИНГиВ",
-      status: "На доработке",
-      report: "Отчет\nПротокол\nИсследования"
-    },
-    {
-      appnumber: "НТ - 30",
-      name: "Власова А. А.,\nИванов Д. Д.",
-      company: 'АО ЭМГ\nНГДУ "Жайык МГ"',
-      analysis: "Полный физическо-химический анализ",
-      registrationdate: "3 МАР 2019",
-      completiondate: "30 ОКТ 2019",
-      laboratory: "ЛИНГиВ",
-      status: "Завершен/отчет\nНе согласовано",
-      report: "Отчет\nПротокол\nИсследования"
-    },
-    {
-      appnumber: "НТ - 30",
-      name: "Ким А. А.",
-      company: 'АО ЭМГ\nНГДУ "Жайык МГ"',
-      analysis: "Полный физическо-химический анализ",
-      registrationdate: "3 МАР 2019",
-      completiondate: "30 ОКТ 2019",
-      laboratory: "ЛИНГиВ",
-      status: "Идет исследование",
-      report: "Отчет\nПротокол\nИсследования"
-    },
-    {
-      appnumber: "НТ - 30",
-      name: "Иванов П. П.",
-      company: 'АО ЭМГ\nНГДУ "Жайык МГ"',
-      analysis: "Полный физическо-химический анализ",
-      registrationdate: "3 МАР 2019",
-      completiondate: "30 ОКТ 2019",
-      laboratory: "ЛИНГиВ",
-      status: "В лаборатории",
-      report: "Отчет\nПротокол\nИсследования"
-    },
-    {
-      appnumber: "НТ - 30",
-      name: "Власова В. В.",
-      company: 'АО ЭМГ\nНГДУ "Кайнармунайгаз"',
-      analysis: "Полный физическо-химический анализ",
-      registrationdate: "9 МАР 2019",
-      completiondate: "30 ОКТ 2019",
-      laboratory: "ЛИНГиВ",
-      status: "В лаборатории",
-      report: "Отчет\nПротокол\nИсследования"
-    },
-    {
-      appnumber: "НТ - 30",
-      name: "Иванов А. А.,\nСтепанова П. П.,\nКим А. А.",
-      company: 'АО ЭМГ\nНГДУ "Жайык МГ"',
-      analysis: "Полный физическо-химический анализ",
-      registrationdate: "3 МАР 2019",
-      completiondate: "30 ОКТ 2019",
-      laboratory: "ЛИНГиВ",
-      status: "Завершен/отчет\nСогласовано",
-      report: "Отчет\nПротокол\nИсследования"
-    },
-    {
-      appnumber: "НТ - 30",
-      name: "Чечин И. И.,\nКим А. А.",
-      company: 'АО ЭМГ\nНГДУ "Жайык МГ"',
-      analysis: "Полный физическо-химический анализ",
-      registrationdate: "3 МАР 2019",
-      completiondate: "30 ОКТ 2019",
-      laboratory: "ЛИНГиВ",
-      status: "Идет исследование",
-      report: "Отчет\nПротокол\nИсследования"
-    },
-    {
-      appnumber: "НТ - 30",
-      name: "Иванов В. В.,\nЧехов В. В.",
-      company: 'АО ЭМГ\nНГДУ "Жайык МГ"',
-      analysis: "Полный физическо-химический анализ",
-      registrationdate: "3 МАР 2019",
-      completiondate: "30 ОКТ 2019",
-      laboratory: "ЛИНГиВ",
-      status: "Идет исследование",
-      report: "Отчет\nПротокол\nИсследования"
-    }
-  ];
 
-  dataSource = this.rows;
-  displayedColumns: string[] = ['appnumber', 'name', 'company', 'analysis', 'registrationdate', 'completiondate', 'laboratory', 'status', 'report'];
-
-  constructor(public dialog: MatDialog) { }
+  constructor(public dialog: MatDialog, private tester: Tester) { }
 
   ngOnInit() {
   }
 
-  openDialog(): void {
+  
+
+  openDialog(): any {
     const dialogRef = this.dialog.open(InformationComponent, {
       width: '1328px',
       height: '880px',
-      
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        const inData = {
+          appNumber: result.controls.appNumber.value,
+          name: result.controls.name.value,
+          company: result.controls.company.value,
+          numberOfContract: result.controls.numberOfContract.value,
+          analysis: result.controls.analysis.value,
+          registrationDate: result.controls.registrationDate.value,
+          completionDate: result.controls.completionDate.value,
+          laboratory: result.controls.laboratory.value,
+          status: result.controls.status.value
+        };
+        this.tester.addTable(inData);
+      }
+    });
+  }
+
+  activeRow;
+
+  openRowDialog(x): any {
+    this.activeRow = x;
+    const dialogRef = this.dialog.open(InformationComponent, {
+      width: '1328px',
+      height: '880px',
+      data: {
+        appNumber: this.activeRow.appNumber,
+        name: this.activeRow.name,
+        company: this.activeRow.company,
+        numberOfContract: this.activeRow.numberOfContract,
+        analysis: this.activeRow.analysis,
+        registrationDate: this.activeRow.registrationDate,
+        completionDate: this.activeRow.completionDate,
+        laboratory: this.activeRow.laboratory,
+        status: this.activeRow.status
+      }
     });
 
+
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+      if (result) {
+        this.activeRow.appNumber = result.controls.appNumber.value;
+        this.activeRow.name = result.controls.name.value;
+        this.activeRow.company = result.controls.company.value;
+        this.activeRow.numberOfContract = result.controls.numberOfContract.value;
+        this.activeRow.analysis = result.controls.analysis.value;
+        this.activeRow.registrationDate = result.controls.registrationDate.value;
+        this.activeRow.completionDate = result.controls.completionDate.value;
+        this.activeRow.laboratory = result.controls.laboratory.value;
+        this.activeRow.status = result.controls.status.value;
+      }
     });
   }
 

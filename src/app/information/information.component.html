@@ -1,196 +1,214 @@
-<!-- <img src="./assets/icons/close.svg" alt="">
-<input type="text"> -->
-<div class="main-title">
-  <p class="application">Заявка - №1</p>
-    <img class = "close" src="./assets/icons/close.svg" alt="" (click)="onNoClick()">  
-</div>
-
-<div class="main-container">
-  <div class="container-left">
-    <form [formGroup]="testform">
-      <div class="row">
-        <div class="input-block">
-          <input class="long" placeholder="Наименование заказчика" formControlName="dialog_name">
-          <img class="book" src="./assets/icons/book.svg" alt="" >
-        </div>
-      </div>
-      <div class="row">
-        <p class="left-p">
-          БИН
-        </p>
-        <input class="left-input" placeholder="2112321246674" formControlName="dialog_bin">
-      </div>
-      <div class="row">
-        <p class="left-p">
-          № договора
-        </p> 
-        <input class="left-input" placeholder="1223" formControlName="dialog_contract">
-      </div>
-      <div class="row">
-        <p class="left-p">
-        Дата планового завершения
-        </p>
-        <div class="input-block">
-          <input class="left-input" placeholder="10 ЯНВ 2019 г." formControlName="dialog_finalDate">
-          <img class="date" src="./assets/icons/date.svg" alt="" >
-        </div>
-      </div>
-      <hr>
-      <div class="row">
-        <p class="download-p">
-          Приложения
-        </p>
-        <div class="input-block">
-          <button class="download-button">
-            <img class="download" src="./assets/icons/download.svg" alt="" >
-            <p class="button-p">Прикрепить файл</p>
-          </button>
-        </div>
-      </div>
-    </form>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <!-- <img src="./assets/icons/close.svg" alt="">
+  <input type="text"> -->
+  <div class="main-title">
+    <p class="application">Заявка - №1</p>
+      <img class = "close" src="./assets/icons/close.svg" alt="" (click)="onNoClick()">  
   </div>
 
-  
+  <div class="main-container">
+    <div class="">
+      <div class="container-left">
 
-  <div class="container-right">
-    <!-- <div class="tab-title">
-      <p class="title">
-        Номер пробы 1
-      </p>
-    </div> -->
-    <!-- <button mat-raised-button class="button-add" (click)="addTab()">
-      <img class="add" src="./assets/icons/plus.svg" alt="">
-    </button> -->
+
+        <!-- <div class="row">
+          <div class="input-block">
+            <input class="long" placeholder="Наименование заказчика" formControlName="name">
+            <img class="book" src="./assets/icons/book.svg" alt="" >
+          </div>
+        </div> -->
+        <div style="margin-bottom: 20px">
+          <mat-form-field app class="">
+            <mat-label>Наименование заказчика</mat-label>
+            <input matInput required formControlName="name">
+            <mat-error *ngIf="form.get('name').invalid">{{nameError()}}</mat-error>
+            <mat-icon matSuffix class="" [matMenuTriggerFor]="menu">
+              menu_book
+            </mat-icon>
+            <mat-menu #menu>
+              <mat-list>
+                <mat-list-item *ngFor="let menu of menus" (click)="this.form.controls.name.patchValue(menu.item)" class="">
+                  {{menu.item}}
+                </mat-list-item>
+              </mat-list>
+            </mat-menu>
+          </mat-form-field>
+        </div>
+
+
+        <!-- <div class="row">
+          <p class="left-p">
+            БИН
+          </p>
+          <input class="left-input" placeholder="2112321246674" formControlName="bin" required 
+          [ngClass]="{'invalid': form.get('bin').invalid && form.get('bin').touched}">
+        </div>
+        <div class="row">
+          <p class="left-p">
+            № договора
+          </p> 
+          <input class="left-input" placeholder="1223" formControlName="numberOfContract" required 
+          [ngClass]="{'invalid': form.get('numberOfContract').invalid && form.get('numberOfContract').touched}">
+        </div>
+        <div class="row">
+          <p class="left-p">
+          Дата планового завершения
+          </p>
+          <div class="input-block">
+            <input class="left-input" placeholder="10 ЯНВ 2019 г." formControlName="completionDate" required 
+            [ngClass]="{'invalid': form.get('completionDate').invalid && form.get('completionDate').touched}">
+            <img class="date" src="./assets/icons/date.svg" alt="" >
+          </div>
+        </div>
+        <hr>
+        <div class="row">
+          <p class="download-p">
+            Приложения
+          </p>
+          <div class="input-block">
+            <button class="download-button">
+              <img class="download" src="./assets/icons/download.svg" alt="" >
+              <p class="button-p">Прикрепить файл</p>
+            </button>
+          </div>
+        </div> -->
+      </div>
+    </div>
+
     
-    <mat-tab-group [selectedIndex]="selected.value" (selectedIndexChange)="selected.setValue($event)">
-      <mat-tab class="tabs" *ngFor="let tab of tabs; let index = index" [label]="tab">
-        <ng-template mat-tab-label>
-          {{tab}}
-          <button mat-raised-button class="button-close" [disabled]="tabs.length === 1" (click)="removeTab(index)">
-            <img class="gray-close" src="./assets/icons/gray-close.svg" alt="">
+
+    <div class="container-right">
+      <!-- <div class="tab-title">
+        <p class="title">
+          Номер пробы 1
+        </p>
+      </div> -->
+      <!-- <button mat-raised-button class="button-add" (click)="addTab()">
+        <img class="add" src="./assets/icons/plus.svg" alt="">
+      </button> -->
+    
+      <mat-tab-group [selectedIndex]="selected.value" (selectedIndexChange)="selected.setValue($event)">
+        <mat-tab class="tabs" *ngFor="let tab of tabs; let index = index" [label]="tab">
+          <ng-template mat-tab-label>
+            Номер пробы {{index + 1}}
+            <button mat-raised-button class="button-close" [disabled]="tabs.length === 1" (click)="removeTab(index)">
+              <img class="gray-close" src="./assets/icons/gray-close.svg" alt="">
+            </button>
+          </ng-template>
+
+          <button mat-raised-button class="button-add" (click)="addTab()">
+            <img class="add" src="./assets/icons/plus.svg" alt="">
           </button>
           
-        </ng-template>
-
-        <ng-template mat-tab-label>
           
-          
-        </ng-template>
-
-        <button mat-raised-button class="button-add" (click)="addTab()">
-          <img class="add" src="./assets/icons/plus.svg" alt="">
-        </button>
-        
-        
-        <div class="main-content">
-          <form  [formGroup]="testform" class="background">
-            <div class="row">
-              <p class="right-p">
-                Месторождение
-              </p>
-              <div class="input-block">
-                <input class="right-input" placeholder="с. Бесагалы" formControlName="dialog_field">
-                <img class="book" src="./assets/icons/book.svg" alt="" >
+          <div class="main-content">
+              <div class="row">
+                <p class="right-p">
+                  Месторождение
+                </p>
+                <div class="input-block">
+                  <input class="right-input" placeholder="с. Бесагалы" formControlName="field">
+                  <img class="book" src="./assets/icons/book.svg" alt="" >
+                </div>
               </div>
-            </div>
-            <div class="row">
-              <p class="right-p">
-                № скважины
-              </p>
-              <input class="right-input" placeholder="191920" formControlName="dialog_well">
-            </div>
-            <div class="row">
-              <p class="right-p">
-                Количество проб
-              </p>
-              <div class="switch">
-                <img class="plus" src="./assets/icons/plus.svg" alt="">
-                <p class="p-number">2</p>
-                <img class="minus" src="./assets/icons/minus.svg" alt="">
+              <div class="row">
+                <p class="right-p">
+                  № скважины
+                </p>
+                <input class="right-input" placeholder="191920" formControlName="well">
               </div>
-            </div>
-            <div class="row">
-              <p class="right-p">
-                Тип пробоотборника
-              </p>
-              <div class="input-block">
-                <input class="right-input" formControlName="dialog_sampler">
-                <img class="book" src="./assets/icons/book.svg" alt="" >
+              <div class="row">
+                <p class="right-p">
+                  Количество проб
+                </p>
+                <div class="switch">
+                  <img class="plus" src="./assets/icons/plus.svg" alt="" (click)="add()">
+                  <p class="p-number">{{sample}}</p>
+                  <img class="minus" src="./assets/icons/minus.svg" alt="" (click)="remove()">
+                </div>
               </div>
-            </div>
-            <div class="row">
-              <p class="right-p">
-                Интервал перфорации
-              </p>
-              <div class="interval">
-                <input class="small" placeholder="345" formControlName="dialog_firstPerforation">
-                <p class="p-minus">-</p>
-                <input class="small" placeholder="445" formControlName="dialog_secondPerforation">     
-                <img class="plus" src="./assets/icons/plus.svg" alt="" >
-                <p class="p-interval">Добавить интервал перфорации</p>
+              <div class="row">
+                <p class="right-p">
+                  Тип пробоотборника
+                </p>
+                <div class="input-block">
+                  <input class="right-input" formControlName="typeOfSampler">
+                  <img class="book" src="./assets/icons/book.svg" alt="" >
+                </div>
               </div>
-            </div>
-            <div class="row">
-              <p class="right-p">
-                Глубина отбора
-              </p>
-              <input class="right-input" placeholder="191920" formControlName="dialog_depth">
-            </div>
-            <div class="row">
-              <p class="right-p">
-                Температура (&deg;C)
-              </p>
-              <input class="right-input" formControlName="dialog_temperature">
-            </div>
-            <div class="row">
-              <p class="right-p">
-                Давление (MPa)
-              </p>
-              <input class="right-input" formControlName="dialog_pressure">
-            </div>
-            <div class="row">
-              <p class="right-p">
-                Дата отбора
-              </p>
-              <div class="input-block">
-                <input class="data-input" placeholder="10 ЯНВ 2019 г." formControlName="dialog_firstDate">
-                <img class="date" src="./assets/icons/date.svg" alt="" >
+              <div class="row">
+                <p class="right-p">
+                  Интервал перфорации
+                </p>
+                <div class="interval">
+                  <input class="small" placeholder="345" formControlName="firstPerforation">
+                  <p class="p-minus">-</p>
+                  <input class="small" placeholder="445" formControlName="secondPerforation">     
+                  <img class="plus" src="./assets/icons/plus.svg" alt="" >
+                  <p class="p-interval">Добавить интервал перфорации</p>
+                </div>
               </div>
-            </div>
-            <div class="row">
-              <p class="right-p">
-                Дата поступления
-              </p>
-              <div class="input-block">
-                <input class="data-input" placeholder="22 ЯНВ 2019 г." formControlName="dialog_secondDate">
-                <img class="date" src="./assets/icons/date.svg" alt="" >
+              <div class="row">
+                <p class="right-p">
+                  Глубина отбора
+                </p>
+                <input class="right-input" placeholder="191920" formControlName="depth">
               </div>
-            </div>
-            <div class="row">
-              <p class="right-p">
-                ID номер пробы
-              </p>
-              <div class="input-block">
-                <input class="right-input" formControlName="dialog_id">
-                <button class="scan-button">
-                  <p class="scan-p">Сканировать</p>
-                </button>
+              <div class="row">
+                <p class="right-p">
+                  Температура (&deg;C)
+                </p>
+                <input class="right-input" formControlName="temperature">
               </div>
-            </div>
-          </form>
-        </div>
-      </mat-tab>
-    </mat-tab-group>
+              <div class="row">
+                <p class="right-p">
+                  Давление (MPa)
+                </p>
+                <input class="right-input" formControlName="pressure">
+              </div>
+              <div class="row">
+                <p class="right-p">
+                  Дата отбора
+                </p>
+                <div class="input-block">
+                  <input class="data-input" placeholder="10 ЯНВ 2019 г." formControlName="setDate">
+                  <img class="date" src="./assets/icons/date.svg" alt="" >
+                </div>
+              </div>
+              <div class="row">
+                <p class="right-p">
+                  Дата поступления
+                </p>
+                <div class="input-block">
+                  <input class="data-input" placeholder="22 ЯНВ 2019 г." formControlName="receiptDate">
+                  <img class="date" src="./assets/icons/date.svg" alt="" >
+                </div>
+              </div>
+              <div class="row">
+                <p class="right-p">
+                  ID номер пробы
+                </p>
+                <div class="input-block">
+                  <input class="right-input" formControlName="IDOfSample">
+                  <button class="scan-button">
+                    <p class="scan-p">Сканировать</p>
+                  </button>
+                </div>
+              </div>
+          </div>
+        </mat-tab>
+      </mat-tab-group>
+    </div>
   </div>
-</div>
+  <!-- 
+  <div>
+    {{form.value | json}}
+  </div> -->
 
-<div>
-  {{testform.value | json}}
-</div>
 
+  <div class="clear">
+    <button type="submit" mat-raised-button class="true" mat-dialog-close >Создать</button>
+    <button type="reset" class="false" mat-button mat-dialog-close>Отменить</button>
+  </div>
 
-<div class="clear">
-  <button class="true" (click)="newClick()">Создать</button>
-  <button class="false" mat-button (click)="onNoClick()">Отменить</button>
-</div>
-
+</form>

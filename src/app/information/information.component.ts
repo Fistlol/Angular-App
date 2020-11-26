@@ -1,110 +1,160 @@
-import { TableComponent } from './../table/table.component';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Worker } from '../worker';
+
+import { TableComponent } from './../table/table.component';
+import { Tester } from './../tester';
 
 
 @Component({
   selector: 'app-information',
   templateUrl: './information.component.html',
-  styleUrls: ['./information.component.scss']
+  styleUrls: ['./information.component.scss'],
+  providers: []
 })
 export class InformationComponent implements OnInit {
+  sample = 2;
   number = 1;
-  tabs = ['Номер пробы ' + this.number];
   
   selected = new FormControl(0);
 
-  // form: FormGroup;
-  testform = this.fb.group({
-    dialog_name: [null],
-    dialog_bin: [null],
-    dialog_contract: [null],
-    dialog_finalDate: [null],
-    dialog_field: [null],
-    dialog_well: [null],
-    dialog_sampler: [null],
-    dialog_firstPerforation: [null],
-    dialog_secondPerforation: [null],
-    dialog_depth: [null],
-    dialog_temperature: [null],
-    dialog_pressure: [null],
-    dialog_firstDate: [null],
-    dialog_secondDate: [null],
-    dialog_id: [null]
-  });
-
-  secondform = this.fb.group({
-    appnumber: [null],
-    name: [null],
+  form = this.fb.group({
+    appNumber: [null],
+    name: [null, Validators.required],
     company: [null],
     analysis: [null],
-    registrationdate: [null],
-    completiondate: [null],
+    registrationDate: [null],
+    completionDate: [null, Validators.required],
     laboratory: [null],
     status: [null],
-    report: [null]
-  })
+    bin: [null, Validators.required],
+    numberOfContract: [null, Validators.required],
+    secondForm: this.fb.group({
+      field: [null],
+      numberOfWell: [null],
+      typeOfSampler: [null],
+      firstPerforation: [null],
+      secondPerforation: [null],
+      depth: [null],
+      temperature: [null],
+      pressure: [null],
+      setDate: [null],
+      receiptDate: [null],
+      IDOfSample: [null]
+    })
+  });
+
+  tabs = [{form: this.form}];
+  selectAfterAdding = true;
+  menus = [{item: 'item 1'}, {item: 'item 2'}, {item: 'item 3'}];
+  secondMenu = [{item: 'item 1'}, {item: 'item 2'}, {item: 'item 3'}];
+
+  tabsPerforationInterval = [
+    {interval: this.form.get('secondForm').get('firstPerforation').get('secondPerforation')}
+  ];
 
 
-
-  addTab() {
-    this.number++;
-    this.tabs.push('Номер пробы ' + this.number);
-    
-    this.selected.setValue(this.tabs.length - 1);
-    
-  }
-
-  removeTab(index: number) {
-    if (this.number != 1) {
-      this.number--;
-    }
-    this.tabs.splice(index, 1);
-    
-  }
-  
   constructor(
     private fb: FormBuilder,
-    private tableComponent: TableComponent,
-    public dialogRef: MatDialogRef<InformationComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: Worker) {}
-
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
-
-  newClick(): void {
-    this.tableComponent.rows.push(this.secondform);
+    public dialogRef: MatDialogRef<TableComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private tester: Tester) {
+    if (data) {
+      for (const key in data) {
+        this.form.get(key).patchValue(data[key]);
+      }
+    }
   }
 
   ngOnInit(): void {
   }
 
+  addTab(): void {
+    this.tabs.push({form: this.form});
+    this.selected.setValue(this.tabs.length - 1);
+  }
 
-  // submit() {
-  //   const {dialog_name} = this.form.value;
-  //   const {dialog_bin} = this.form.value;
-  //   const {dialog_contract} = this.form.value;
-  //   const {dialog_finalDate} = this.form.value;
-  //   const {dialog_field} = this.form.value;
-  //   const {dialog_well} = this.form.value;
-  //   const {dialog_sampler} = this.form.value;
-  //   const {dialog_firstPerforation} = this.form.value;
-  //   const {dialog_secondPerforation} = this.form.value;
-  //   const {dialog_depth} = this.form.value;
-  //   const {dialog_temperature} = this.form.value;
-  //   const {dialog_pressure} = this.form.value;
-  //   const {dialog_firstDate} = this.form.value;
-  //   const {dialog_secondDate} = this.form.value;
-  //   const {dialog_id} = this.form.value;
+  removeTab(index: number): void {
+    this.tabs.splice(index, 1);
+    this.selected.setValue(this.tabs.length - 1);
+  }
+
+  onSubmit(): void {
+    this.dialogRef.close(this.form);
+    this.tester.addDialog(this.form.get('secondForm'));
+  }
+
+  addInterval(): void {
+    this.tabsPerforationInterval.push(
+          {interval: this.form.get('secondForm').get('firstPerforation').get('secondPerforation')}
+    );
+  }
+  
+  removeInterval(index: number): void {
+    this.tabsPerforationInterval.splice(index, 1);
+  }
     
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
 
-  //   console.log(
-  //     dialog_name, dialog_bin, dialog_contract, dialog_finalDate, dialog_field, dialog_well, dialog_sampler, dialog_firstPerforation, dialog_secondPerforation,
-  //     dialog_depth, dialog_temperature, dialog_pressure, dialog_firstDate, dialog_secondDate, dialog_id
-  //     )
-  // }
+  add(): void {
+    this.number++;
+  }
 
+  remove(): void {
+    this.number--;
+    if (this.number <= 1) {
+      this.number = 1;
+    }
+  }
+  
+  plusPositionAfter(): object {
+    const styles = {
+          'right.px': -30
+    };
+    return styles;
+  }
+
+  plusPositionBefore(): object {
+    let styles = {};
+    if (this.tabs.length > 3) {
+          styles = {
+                'right.px': -30
+          };
+    } else {
+          styles = {
+                'left.px': 270 * this.tabs.length
+          };
+    }
+    return styles;
+  }
+
+  nameError(): string {
+    if (this.form.get('name').hasError('required')) {
+      return 'Введите наименование заказчика';
+    }
+    return '';
+  }
+
+  binError(): string {
+    if (this.form.get('bin').hasError('required')) {
+      return 'Заполните поле БИН';
+    }
+    return '';
+  }
+
+  contractNumberError(): string {
+    if (this.form.get('contractNumber').hasError('required')) {
+      return 'Введите номер договора';
+    }
+    return '';
+  }
+
+  dateFinishError(): string {
+    if (this.form.get('dateFinish').hasError('required')) {
+      return 'Выберите дату завершения';
+    }
+    return '';
+  }
 }
