@@ -1,36 +1,49 @@
-import { TableService } from './../services/table.service';
-import { important, secondary } from '../mainData';
-import { InformationComponent } from './../information/information.component';
-import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import {MatPaginator} from '@angular/material/paginator';
+import {MatSort} from '@angular/material/sort';
+import {MatTable} from '@angular/material/table';
+import {MatDialog} from '@angular/material/dialog';
+import {InformationComponent} from '../information/information.component';
+import {DataTableDataSource} from './data-table-datasource';
+import {TableService} from '../services/table.service';
+import {Worker} from '../worker';
 
 @Component({
-  selector: 'app-table',
-  templateUrl: './table.component.html',
-  styleUrls: ['./table.component.scss']
+  selector: 'app-data-table',
+  templateUrl: './data-table.component.html',
+  styleUrls: ['./data-table.component.scss']
 })
-
-export class TableComponent implements OnInit {
-
-  constructor(public dialog: MatDialog, private tableService: TableService) { }
-  buttons = [{button: 'Отчет'}, {button: 'Протокол'}, {button: 'Исследования'}];
-  displayedColumns = ['appNumber', 'name', 'company', 'analysis', 'registrationDate', 'completionDate', 'laboratory', 'status', 'report'];
-  dataSource = important;
-
+export class DataTableComponent implements AfterViewInit, OnInit {
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatTable) table: MatTable<Worker>;
+  dataSource: DataTableDataSource = new DataTableDataSource();
+  buttons = [{btn: 'Отчет'}, {btn: 'Протокол'}, {btn: 'Исследования'}];
+  displayedColumns = [
+    'appNumber', 'name', 'company', 'analysis', 'registrationDate',
+    'completionDate', 'laboratory', 'status', 'report'
+  ];
   activeRow;
 
-  ngOnInit(): void {
+  constructor(public dialog: MatDialog,
+              private tableService: TableService) {
+  }
 
+  ngOnInit(): void {
+    this.tableService.get().subscribe(res => this.dataSource.data = res);
+  }
+
+  ngAfterViewInit(): void {
+    this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
+    this.table.dataSource = this.dataSource;
   }
 
   openDialog(): any {
-    const dialogRef = this.dialog.open(InformationComponent, {
-      width: '1328px',
-      height: '880px',
-    });
+    const dialogRef = this.dialog.open(InformationComponent);
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        const data = {
+        const inData = {
           appNumber: result.controls.appNumber.value,
           name: result.controls.name.value,
           company: result.controls.company.value,
@@ -41,16 +54,14 @@ export class TableComponent implements OnInit {
           laboratory: result.controls.laboratory.value,
           status: result.controls.status.value
         };
-        this.tableService.add(data);
+        this.tableService.add(inData);
       }
     });
   }
 
-  openRowDialog(x): any {
+  openUserDialog(x): any {
     this.activeRow = x;
     const dialogRef = this.dialog.open(InformationComponent, {
-      width: '1328px',
-      height: '880px',
       data: {
         appNumber: this.activeRow.appNumber,
         name: this.activeRow.name,

@@ -1,23 +1,18 @@
-import { FormBuilder, FormControl, Validators } from '@angular/forms';
-import { Component, Inject, OnInit } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-
-import { TableComponent } from './../table/table.component';
-import { Tester } from './../tester';
+import {Component, Inject, OnInit} from '@angular/core';
+import {FormBuilder, FormControl, Validators} from '@angular/forms';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import {DataTableComponent} from '../data-table/data-table.component';
+import {TableService} from '../services/table.service';
 
 
 @Component({
   selector: 'app-information',
   templateUrl: './information.component.html',
-  styleUrls: ['./information.component.scss'],
-  providers: []
+  styleUrls: ['./information.component.scss']
 })
 export class InformationComponent implements OnInit {
   sample = 2;
-  number = 1;
-  
-  selected = new FormControl(0);
-
+  number = 2;
   form = this.fb.group({
     appNumber: [null],
     name: [null, Validators.required],
@@ -43,11 +38,11 @@ export class InformationComponent implements OnInit {
       IDOfSample: [null]
     })
   });
-
-  tabs = [{form: this.form}];
+  selected = new FormControl(0);
   selectAfterAdding = true;
-  menus = [{item: 'item 1'}, {item: 'item 2'}, {item: 'item 3'}];
-  secondMenu = [{item: 'item 1'}, {item: 'item 2'}, {item: 'item 3'}];
+  tabs = [{form: this.form}];
+  menus = [{item: 'test 1'}, {item: 'test 2'}, {item: 'test 3'}];
+  secondMenu = [{item: 'test 1'}, {item: 'test 2'}, {item: 'test 3'}];
 
   tabsPerforationInterval = [
     {interval: this.form.get('secondForm').get('firstPerforation').get('secondPerforation')}
@@ -56,10 +51,11 @@ export class InformationComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    public dialogRef: MatDialogRef<TableComponent>,
+    public dialogRef: MatDialogRef<DataTableComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private tester: Tester) {
+    private tableService: TableService) {
     if (data) {
+      // tslint:disable-next-line:forin
       for (const key in data) {
         this.form.get(key).patchValue(data[key]);
       }
@@ -69,9 +65,11 @@ export class InformationComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  addTab(): void {
+  addTab(selectAfterAdding): void {
     this.tabs.push({form: this.form});
-    this.selected.setValue(this.tabs.length - 1);
+    if (selectAfterAdding) {
+      this.selected.setValue(this.tabs.length - 1);
+    }
   }
 
   removeTab(index: number): void {
@@ -80,22 +78,19 @@ export class InformationComponent implements OnInit {
   }
 
   onSubmit(): void {
+    // this.tableService.addTable(this.form.value);
     this.dialogRef.close(this.form);
-    this.tester.addDialog(this.form.get('secondForm'));
+    this.tableService.addDialog(this.form.get('secondForm'));
   }
 
   addInterval(): void {
     this.tabsPerforationInterval.push(
-          {interval: this.form.get('secondForm').get('firstPerforation').get('secondPerforation')}
+      {interval: this.form.get('secondForm').get('firstPerforation').get('secondPerforation')}
     );
   }
-  
+
   removeInterval(index: number): void {
     this.tabsPerforationInterval.splice(index, 1);
-  }
-    
-  onNoClick(): void {
-    this.dialogRef.close();
   }
 
   add(): void {
@@ -108,10 +103,10 @@ export class InformationComponent implements OnInit {
       this.number = 1;
     }
   }
-  
+
   plusPositionAfter(): object {
     const styles = {
-          'right.px': -30
+      'right.px': -30
     };
     return styles;
   }
@@ -119,13 +114,13 @@ export class InformationComponent implements OnInit {
   plusPositionBefore(): object {
     let styles = {};
     if (this.tabs.length > 3) {
-          styles = {
-                'right.px': -30
-          };
+      styles = {
+        'right.px': -30
+      };
     } else {
-          styles = {
-                'left.px': 270 * this.tabs.length
-          };
+      styles = {
+        'left.px': 270 * this.tabs.length
+      };
     }
     return styles;
   }
@@ -145,14 +140,14 @@ export class InformationComponent implements OnInit {
   }
 
   contractNumberError(): string {
-    if (this.form.get('contractNumber').hasError('required')) {
+    if (this.form.get('numberOfContract').hasError('required')) {
       return 'Введите номер договора';
     }
     return '';
   }
 
   dateFinishError(): string {
-    if (this.form.get('dateFinish').hasError('required')) {
+    if (this.form.get('completionDate').hasError('required')) {
       return 'Выберите дату завершения';
     }
     return '';

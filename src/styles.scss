@@ -2,28 +2,82 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
 
-html, body { height: 100%; }
-body { margin: 0;}
+//html, body {
+//  width: 100%;
+//  height: 100%;
+//  box-sizing: border-box;
+//  overflow: hidden;
+//  display: flex;
+//  align-items: center;
+//  justify-content: center;
+//}
 
-.mat-dialog-container {
-    padding: 0px !important;
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
+.cdk-overlay-pane {
+  max-width: 1400px !important;
+}
 
-.mat-tab-header {
-    width: 700px;
+.mat-dialog-container {
+  padding: 0 !important;
+}
+
+.mat-ink-bar {
+  display: none !important;
 }
 
 .mat-tab-label {
-    padding: 0;
+  margin-bottom: 20px !important;
+  opacity: 1 !important;
+  padding: 0 !important;
+  height: auto !important;
+  min-width: auto !important;
 }
 
-.mat-ripple {
-    background-color: #E2EAF0;
-    font-family: Roboto, "Helvetica Neue", sans-serif;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 13px;
-    line-height: 15px;
-    border: 0.8px solid #AFBEC9;
+.mat-tab-label-active {
+  background: rgb(228, 233, 239) !important;
 }
+
+.mat-form-field-appearance-outline .mat-form-field-flex {
+  margin-top: -0.5em !important;
+  height: 55px;
+}
+
+//html, body { height: 100%; }
+//body { margin: 0;}
+//
+//.mat-dialog-container {
+//    padding: 0px !important;
+//}
+//
+//.mat-form-field-wrapper {
+//
+//  padding: 0;
+//  &.long {
+//    width: 450px !important;
+//    margin-bottom: 15px
+//  }
+//}
+//
+//.mat-tab-header {
+//    width: 700px;
+//}
+//
+//.mat-tab-label {
+//    padding: 0;
+//}
+//
+//.mat-ripple {
+//    font-family: Roboto, "Helvetica Neue", sans-serif;
+//    font-style: normal;
+//    font-weight: normal;
+//    font-size: 13px;
+//    line-height: 15px;
+//}
+//
+//.mat-tab-body-content {
+//  height: 680px !important;
+//}

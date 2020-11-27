@@ -1,60 +1,71 @@
-<body>
-  <button mat-button (click) = "openDialog()">Создать заявку</button>
+<div>
+  <div>
+    <button mat-stroked-button (click)="openDialog()">
+      Создать заявку
+    </button>
+  </div>
+  <div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource">
 
+      <ng-container matColumnDef="appNumber">
+        <th mat-header-cell *matHeaderCellDef class="application"> "№ заявки</th>
+        <td mat-cell *matCellDef="let element" (click)="openRowDialog(element)"> {{element.appNumber}} </td>
+      </ng-container>
 
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef class="name"> Исполнители</th>
+        <td mat-cell *matCellDef="let element" (click)="openRowDialog(element)"> {{element.name}} </td>
+      </ng-container>
 
-  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+      <ng-container matColumnDef="company">
+        <th mat-header-cell *matHeaderCellDef> Компания и номер договора</th>
+        <td mat-cell *matCellDef="let element" (click)="openRowDialog(element)">
+          {{element.company}}
+          <br><br>
+          <span>
+            {{element.numberOfContract}}
+          </span>
+        </td>
+      </ng-container>
 
-    <ng-container matColumnDef="appNumber">
-      <th mat-header-cell *matHeaderCellDef> "№ заявки </th>
-      <td mat-cell *matCellDef="let element" (click)="openRowDialog(element)"> {{element.appNumber}} </td>
-    </ng-container>
-  
-    <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef> Исполнители </th>
-      <td mat-cell *matCellDef="let element" (click)="openRowDialog(element)"> {{element.name}} </td>
-    </ng-container>
-  
-    <ng-container matColumnDef="company">
-      <th mat-header-cell *matHeaderCellDef> Компания и номер договора </th>
-      <td mat-cell *matCellDef="let element" (click)="openRowDialog(element)"> {{element.company}} </td>
-    </ng-container>
-  
-    <ng-container matColumnDef="analysis">
-      <th mat-header-cell *matHeaderCellDef> Вид анализа </th>
-      <td mat-cell *matCellDef="let element" (click)="openRowDialog(element)"> {{element.analysis}} </td>
-    </ng-container>
-  
-    <ng-container matColumnDef="registrationDate">
-      <th mat-header-cell *matHeaderCellDef> Дата регистрации </th>
-      <td mat-cell *matCellDef="let element" (click)="openRowDialog(element)"> {{element.registrationDate | date:'d MMM Y':null:'ru'}} </td>
-    </ng-container>
-  
-    <ng-container matColumnDef="completionDate">
-      <th mat-header-cell *matHeaderCellDef> Дата планового завершения </th>
-      <td mat-cell *matCellDef="let element" (click)="openRowDialog(element)"> {{element.completionDate | date:'d MMM Y':null:'ru'}} </td>
-    </ng-container>
-  
-    <ng-container matColumnDef="laboratory">
-      <th mat-header-cell *matHeaderCellDef> Лаборатория </th>
-      <td mat-cell *matCellDef="let element" (click)="openRowDialog(element)"> {{element.laboratory}} </td>
-    </ng-container>
-  
-    <ng-container matColumnDef="status">
-      <th mat-header-cell *matHeaderCellDef> Статус </th>
-      <td mat-cell *matCellDef="let element" (click)="openRowDialog(element)"> {{element.status}} </td>
-    </ng-container>
-  
-    <ng-container matColumnDef="report">
-      <th mat-header-cell *matHeaderCellDef> Отчет/Протокол </th>
-      <td mat-cell *matCellDef="let element" > 
-        <div *ngFor="let i of buttons" class="btns-container">
-          <button class="btns">{{i.button}}</button>
-        </div>  
-      </td>
-    </ng-container>
-  
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  </table>
-</body>
+      <ng-container matColumnDef="analysis">
+        <th mat-header-cell *matHeaderCellDef> Вид анализа</th>
+        <td mat-cell *matCellDef="let element" (click)="openRowDialog(element)"> {{element.analysis}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="registrationDate">
+        <th mat-header-cell *matHeaderCellDef> Дата регистрации</th>
+        <td mat-cell *matCellDef="let element" (click)="openRowDialog(element)">
+          {{element.registrationDate | date:'d MMM Y':null:'ru'}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="completionDate">
+        <th mat-header-cell *matHeaderCellDef> Дата планового завершения</th>
+        <td mat-cell *matCellDef="let element" (click)="openRowDialog(element)">
+          {{element.completionDate | date:'d MMM Y':null:'ru'}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="laboratory">
+        <th mat-header-cell *matHeaderCellDef> Лаборатория</th>
+        <td mat-cell *matCellDef="let element" (click)="openRowDialog(element)"> {{element.laboratory}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef class="status"> Статус</th>
+        <td mat-cell *matCellDef="let element" (click)="openRowDialog(element)"> {{element.status}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="report">
+        <th mat-header-cell *matHeaderCellDef> Отчет/Протокол</th>
+        <td mat-cell *matCellDef="let element">
+          <div *ngFor="let i of buttons" class="btns-container">
+            <button class="btns">{{i.button}}</button>
+          </div>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+</div>
