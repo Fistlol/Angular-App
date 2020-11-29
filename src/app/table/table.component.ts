@@ -20,7 +20,7 @@ export class TableComponent implements OnInit {
   activeRow;
 
   ngOnInit(): void {
-
+    console.log(1);
   }
 
   openDialog(): any {

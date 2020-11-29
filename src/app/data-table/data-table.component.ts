@@ -1,10 +1,9 @@
 import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
-import {MatTable} from '@angular/material/table';
+import {MatTable, MatTableDataSource} from '@angular/material/table';
 import {MatDialog} from '@angular/material/dialog';
 import {InformationComponent} from '../information/information.component';
-import {DataTableDataSource} from './data-table-datasource';
 import {TableService} from '../services/table.service';
 import {Worker} from '../worker';
 
@@ -17,7 +16,7 @@ export class DataTableComponent implements AfterViewInit, OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatTable) table: MatTable<Worker>;
-  dataSource: DataTableDataSource = new DataTableDataSource();
+  dataSource: MatTableDataSource<any> = new MatTableDataSource([]);
   buttons = [{btn: 'Отчет'}, {btn: 'Протокол'}, {btn: 'Исследования'}];
   displayedColumns = [
     'appNumber', 'name', 'company', 'analysis', 'registrationDate',
@@ -30,17 +29,22 @@ export class DataTableComponent implements AfterViewInit, OnInit {
   }
 
   ngOnInit(): void {
-    this.tableService.get().subscribe(res => this.dataSource.data = res);
+    console.log(2);
+    this.tableService.get().subscribe(res => {
+      console.log(res);
+      this.dataSource.data = [...res];
+    });
   }
 
   ngAfterViewInit(): void {
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
-    this.table.dataSource = this.dataSource;
   }
 
   openDialog(): any {
-    const dialogRef = this.dialog.open(InformationComponent);
+    const dialogRef = this.dialog.open(InformationComponent, {
+      width: '1100px',
+      height: '700px', });
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         const inData = {
@@ -61,7 +65,9 @@ export class DataTableComponent implements AfterViewInit, OnInit {
 
   openUserDialog(x): any {
     this.activeRow = x;
-    const dialogRef = this.dialog.open(InformationComponent, {
+    const dialogRef = this.dialog.open(InformationComponent,  {
+      width: '1100px',
+      height: '700px',
       data: {
         appNumber: this.activeRow.appNumber,
         name: this.activeRow.name,

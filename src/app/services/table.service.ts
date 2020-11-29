@@ -1,24 +1,26 @@
 import {important, secondary} from '../mainData';
 import {Worker} from '../worker';
 import {Injectable} from '@angular/core';
-import {Observable, of} from 'rxjs';
+import {BehaviorSubject, Observable, of} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TableService {
-  data = important;
+  data = new BehaviorSubject(important);
   dataDialog = secondary;
 
   constructor() {
   }
 
   get(): Observable<Worker[]> {
-    return of(this.data);
+    return this.data.asObservable();
   }
 
   add(x): void {
-    this.data.push(x);
+    const data = [...this.data.value];
+    data.push(x);
+    this.data.next(data);
   }
 
   addDialog(x): void {
