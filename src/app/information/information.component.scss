@@ -27,6 +27,7 @@
       display: grid;
       grid-template-columns: 30% 65%;
       grid-column-gap: 5%;
+      height: 650px;
 
       &__left {
 
@@ -183,7 +184,7 @@
     }
 
     &__action {
-      margin: 0 auto 20px;
+      margin: 0 auto;
       text-align: center;
 
       &__buttonCreate {

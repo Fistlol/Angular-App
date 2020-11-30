@@ -14,7 +14,8 @@ export const important: Worker[] = [
     laboratory: 'ЛИПФ',
     status: 'Новая',
     bin: 21331232,
-    numberOfContract: '№ 208-112-34'
+    numberOfContract: '№ 208-112-34',
+    numberOfSample: 2
   },
   {
     appNumber: 'НТ - 30',
@@ -26,7 +27,8 @@ export const important: Worker[] = [
     laboratory: 'ЛИНГиВ',
     status: 'Идет исследование',
     bin: 21331232,
-    numberOfContract: '№ 208-112-34'
+    numberOfContract: '№ 208-112-34',
+    numberOfSample: 2
   },
   {
     appNumber: 'IОР - 66\nНТ - 30',
@@ -38,7 +40,8 @@ export const important: Worker[] = [
     laboratory: 'ЛИПФ -> ЛИНГиВ',
     status: 'Новая',
     bin: 21331232,
-    numberOfContract: '№ 208-112-34'
+    numberOfContract: '№ 208-112-34',
+    numberOfSample: 2
   },
   {
     appNumber: 'IОР - 66\nНТ - 30',
@@ -50,7 +53,8 @@ export const important: Worker[] = [
     laboratory: 'ЛИПФ -> ЛИНГиВ',
     status: 'Новая',
     bin: 21331232,
-    numberOfContract: '№ 208-112-34'
+    numberOfContract: '№ 208-112-34',
+    numberOfSample: 2
   },
   {
     appNumber: 'НТ - 30',
@@ -62,6 +66,7 @@ export const important: Worker[] = [
     laboratory: 'ЛИНГиВ',
     status: 'На доработке',
     bin: 21331232,
-    numberOfContract: '№ 208-112-34'
+    numberOfContract: '№ 208-112-34',
+    numberOfSample: 2
   }
 ];

@@ -1,415 +1,444 @@
-<form
-  class="dialog"
-  [formGroup]="form"
-  (ngSubmit)="onSubmit()"
->
-  <mat-toolbar class="dialog__main-title">
-    <span class="dialog__main-title__title">Заявка №1</span>
-    <span class="dialog__main-title__end"></span>
-    <mat-icon class="dialog__main-title__icon" mat-dialog-close>close</mat-icon>
-  </mat-toolbar>
-  <div class="dialog__form">
-    <div class="dialog__form__container">
-      <div class="dialog__form__container__left">
-        <div style="margin-bottom: 20px">
-          <mat-form-field
-            appearance="outline"
-            class="dialog__form__container__left__input"
-          >
-            <mat-label>Наименование заказчика</mat-label>
-            <input
-              matInput
-              required
-              formControlName="name"
+ <form
+    class="dialog"
+    [formGroup]="form"
+    (ngSubmit)="onSubmit()"
+  >
+    <mat-toolbar class="dialog__main-title">
+      <span class="dialog__main-title__title">Заявка №1</span>
+      <span class="dialog__main-title__end"></span>
+      <mat-icon class="dialog__main-title__icon" mat-dialog-close>close</mat-icon>
+    </mat-toolbar>
+    <div class="dialog__form">
+      <div class="dialog__form__container">
+        <div class="dialog__form__container__left">
+          <div style="margin-bottom: 20px">
+            <mat-form-field
+              appearance="outline"
+              class="dialog__form__container__left__input"
             >
-            <mat-error *ngIf="form.get('name').invalid">{{nameError()}}</mat-error>
-            <mat-icon
-              matSuffix
-              class="dialog__form__container__left__icon"
-              [matMenuTriggerFor]="menu"
-              style="cursor: pointer"
-            >
-              menu_book
-            </mat-icon>
-            <mat-menu #menu>
-              <mat-list>
-                <mat-list-item
-                  *ngFor="let menu of menus"
-                  (click)="this.form.controls.name.patchValue(menu.item)"
-                  class="dialog__form__container__left__menu"
+              <mat-label>Наименование заказчика</mat-label>
+              <input
+                matInput
+                required
+                formControlName="name"
+              >
+              <mat-error *ngIf="form.get('name').invalid">{{nameError()}}</mat-error>
+              <mat-icon
+                matSuffix
+                class="dialog__form__container__left__icon"
+                [matMenuTriggerFor]="menu"
+                style="cursor: pointer"
+              >
+                menu_book
+              </mat-icon>
+              <mat-menu #menu>
+                <mat-list>
+                  <mat-list-item
+                    *ngFor="let menu of menus"
+                    (click)="this.form.controls.name.patchValue(menu.item)"
+                    class="dialog__form__container__left__menu"
+                  >
+                    {{menu.item}}
+                  </mat-list-item>
+                </mat-list>
+              </mat-menu>
+            </mat-form-field>
+          </div>
+          <div class="dialog__form__container__left__background">
+            <div class="dialog__form__container__left__block">
+              <div>БИН <span style="color: red">*</span></div>
+              <mat-form-field
+                appearance="outline"
+                class="dialog__form__container__left__input"
+              >
+                <input
+                  matInput
+                  placeholder="231232136171567"
+                  formControlName="bin"
+                  required
+                  [ngClass]="{'invalid': form.get('bin').invalid && form.get('bin').touched}"
                 >
-                  {{menu.item}}
-                </mat-list-item>
-              </mat-list>
-            </mat-menu>
-          </mat-form-field>
-        </div>
-        <div class="dialog__form__container__left__background">
-          <div class="dialog__form__container__left__block">
-            <div>БИН <span style="color: red">*</span></div>
-            <mat-form-field
-              appearance="outline"
-              class="dialog__form__container__left__input"
-            >
-              <input
-                matInput
-                placeholder="231232136171567"
-                formControlName="bin"
-                required
-                [ngClass]="{'invalid': form.get('bin').invalid && form.get('bin').touched}"
+                <mat-error *ngIf="form.get('bin').invalid">{{binError()}}</mat-error>
+              </mat-form-field>
+            </div>
+            <div class="dialog__form__container__left__block">
+              <div>№ договора <span style="color: red">*</span></div>
+              <mat-form-field
+                appearance="outline"
+                class="dialog__form__container__left__input"
               >
-              <mat-error *ngIf="form.get('bin').invalid">{{binError()}}</mat-error>
-            </mat-form-field>
-          </div>
-          <div class="dialog__form__container__left__block">
-            <div>№ договора <span style="color: red">*</span></div>
-            <mat-form-field
-              appearance="outline"
-              class="dialog__form__container__left__input"
-            >
-              <input
-                matInput
-                required
-                placeholder="1223"
-                formControlName="numberOfContract"
-                [ngClass]="{'invalid': form.get('numberOfContract').invalid && form.get('numberOfContract').touched}"
+                <input
+                  matInput
+                  required
+                  placeholder="1223"
+                  formControlName="numberOfContract"
+                  [ngClass]="{'invalid': form.get('numberOfContract').invalid && form.get('numberOfContract').touched}"
+                >
+                <mat-error *ngIf="form.get('numberOfContract').invalid">{{contractNumberError()}}</mat-error>
+              </mat-form-field>
+            </div>
+            <div class="dialog__form__container__left__block">
+              <div>Дата планового завершения <span style="color: red">*</span></div>
+              <mat-form-field
+                appearance="outline"
+                [ngClass]="{'invalid': form.get('completionDate').invalid && form.get('completionDate').touched}"
+                (click)="picker.open()"
               >
-              <mat-error *ngIf="form.get('numberOfContract').invalid">{{contractNumberError()}}</mat-error>
-            </mat-form-field>
-          </div>
-          <div class="dialog__form__container__left__block">
-            <div>Дата планового завершения <span style="color: red">*</span></div>
-            <mat-form-field
-              appearance="outline"
-              [ngClass]="{'invalid': form.get('completionDate').invalid && form.get('completionDate').touched}"
-              (click)="picker.open()"
-            >
-              <mat-label>
+                <mat-label>
                                 <span *ngIf="form.get('completionDate').value; else elseDate">
                                     {{form.get('completionDate').value | date}}
                                 </span>
-                <ng-template #elseDate>
-                  <span style="color: rgb(147, 147, 147);">Выберите дату</span>
-                </ng-template>
-              </mat-label>
-              <input
-                matInput
-                required
-                placeholder="Выберите дату"
-                formControlName="completionDate"
-                [matDatepicker]="picker"
-              >
-              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-              <mat-error *ngIf="form.get('completionDate').invalid">{{dateFinishError()}}</mat-error>
-              <mat-datepicker #picker></mat-datepicker>
+                  <ng-template #elseDate>
+                    <span style="color: rgb(147, 147, 147);">Выберите дату</span>
+                  </ng-template>
+                </mat-label>
+                <input
+                  matInput
+                  required
+                  placeholder="Выберите дату"
+                  formControlName="completionDate"
+                  [matDatepicker]="picker"
+                >
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-error *ngIf="form.get('completionDate').invalid">{{dateFinishError()}}</mat-error>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="dialog__form__container__left__hr"></div>
+          <div class="dialog__form__container__left__block">
+            <div>Приложения</div>
+            <mat-form-field
+              appearance="outline"
+              class="dialog__form__container__left__input"
+            >
+              <input matInput placeholder="Прикрепить файл">
+              <mat-icon matPrefix class="dialog__form__container__left__icon">save_alt</mat-icon>
             </mat-form-field>
           </div>
         </div>
-        <div class="dialog__form__container__left__hr"></div>
-        <div class="dialog__form__container__left__block">
-          <div>Приложения</div>
-          <mat-form-field
-            appearance="outline"
-            class="dialog__form__container__left__input"
+        <div style="position: relative;">
+          <div class="dialog__form__container__right__addTab"
+               [ngStyle]="plusPositionBefore()">
+            <mat-icon (click)="addTab(selectAfterAdding)"
+                      class="dialog__form__container__right__addTab__icon">
+              add
+            </mat-icon>
+          </div>
+          <mat-tab-group
+            mat-align-tabs="start"
+            [selectedIndex]="selected.value"
+            (selectedIndexChange)="selected.setValue($event)"
           >
-            <input matInput placeholder="Прикрепить файл">
-            <mat-icon matPrefix class="dialog__form__container__left__icon">save_alt</mat-icon>
-          </mat-form-field>
-        </div>
-      </div>
-      <div style="position: relative;">
-        <div class="dialog__form__container__right__addTab"
-             [ngStyle]="plusPositionBefore()">
-          <mat-icon (click)="addTab(selectAfterAdding)"
-                    class="dialog__form__container__right__addTab__icon">
-            add
-          </mat-icon>
-        </div>
-        <mat-tab-group
-          mat-align-tabs="start"
-          [selectedIndex]="selected.value"
-          (selectedIndexChange)="selected.setValue($event)"
-        >
-          <mat-tab
-            *ngFor="let tab of tabs; let index = index"
-            [label]="tab"
-          >
-            <ng-template mat-tab-label>
-              <div class="dialog__form__container__right">
-                Номер проба №{{index + 1}}
-                <div class="dialog__form__container__right__line"></div>
-                <button
-                  mat-icon-button
-                  [disabled]="tabs.length === 1"
-                  (click)="removeTab(index)"
-                >
-                  <mat-icon>close</mat-icon>
-                </button>
-              </div>
-            </ng-template>
-            <div
-              class="dialog__form__container__right__background"
-              formGroupName="secondForm"
+            <mat-tab
+              *ngFor="let tab of tabs; let index = index"
+              [label]="tab"
             >
-              <div class="dialog__form__container__right__container">
-                <div class="dialog__form__container__right__block">
-                  <div class="dialog__form__container__right__place">Месторождение</div>
-                  <mat-form-field
-                    appearance="outline"
-                    class="dialog__form__container__right__input"
+              <ng-template mat-tab-label>
+                <div class="dialog__form__container__right">
+                  Номер проба №{{index + 1}}
+                  <div class="dialog__form__container__right__line"></div>
+                  <button
+                    mat-icon-button
+                    [disabled]="tabs.length === 1"
+                    (click)="removeTab(index)"
                   >
-                    <input
-                      matInput
-                      placeholder="с. Бесагалы"
-                      formControlName="field"
-                    >
-                    <mat-icon
-                      matSuffix
-                      class="dialog__form__container__left__icon"
-                      [matMenuTriggerFor]="menu2"
-                      style="cursor: pointer"
-                    >
-                      menu_book
-                    </mat-icon>
-<!--                    <mat-menu #menu2>-->
-<!--                      <mat-list>-->
-<!--                        <mat-list-item-->
-<!--                          *ngFor="let secondM of secondMenu"-->
-<!--                          (click)="this.form.controls.secondForm.controls.field.patchValue(secondM.item)"-->
-<!--                          -->
-<!--                          class="dialog__form__container__left__menu"-->
-<!--                        >-->
-<!--                          {{secondM.item}}-->
-<!--                        </mat-list-item>-->
-<!--                      </mat-list>-->
-<!--                    </mat-menu>-->
-                    <mat-menu #menu2>
-                      <mat-list>
-                        <mat-list-item
-                          *ngFor="let secondM of secondMenu"
-                          (click)="this.form.controls.field.patchValue(secondM.item)"
-
-                          class="dialog__form__container__left__menu"
-                        >
-                          {{secondM.item}}
-                        </mat-list-item>
-                      </mat-list>
-                    </mat-menu>
-
-                  </mat-form-field>
-                </div>
-                <div class="dialog__form__container__right__block">
-                  <div class="dialog__form__container__right__place">№ скважины</div>
-                  <mat-form-field
-                    appearance="outline"
-                    class="dialog__form__container__right__input"
-                  >
-                    <input
-                      matInput
-                      placeholder="191920"
-                      formControlName="numberOfWell"
-                    >
-                  </mat-form-field>
-                </div>
-                <div class="dialog__form__container__right__block">
-                  <div class="dialog__form__container__right__place">Количество проб</div>
-                  <div class="dialog__form__container__right__block">
-                    <mat-icon
-                      (click)="add()"
-                      class="dialog__form__container__right__icon"
-                    >
-                      add
-                    </mat-icon>
-                    <span class="dialog__form__container__right__text">
-                      {{number}}
-                    </span>
-                    <mat-icon
-                      (click)="remove()"
-                      class="dialog__form__container__right__icon"
-                    >
-                      remove
-                    </mat-icon>
-                  </div>
-                </div>
-                <div class="dialog__form__container__right__block">
-                  <div class="dialog__form__container__right__place">Тип пробоотборника</div>
-                  <mat-form-field
-                    appearance="outline"
-                    class="dialog__form__container__right__input"
-                  >
-                    <input matInput formControlName="typeOfSampler">
-                    <mat-icon
-                      matSuffix
-                      class="dialog__form__container__left__icon"
-                    >
-                      menu_book
-                    </mat-icon>
-                  </mat-form-field>
-                </div>
-                <div
-                  class="dialog__form__container__right__block"
-                  *ngFor="let interval of tabsPerforationInterval; let i = index;"
-                >
-                  <div *ngIf="i < 1; else elseInterval"
-                       class="dialog__form__container__right__block">
-                    <div class="dialog__form__container__right__place">Интервал перфорации</div>
-                    <mat-form-field
-                      appearance="outline"
-                      class="dialog__form__container__right__input__performs dialog__form__container__right__input"
-                    >
-                      <input matInput placeholder="345" formControlName="firstPerforation">
-                    </mat-form-field>
-                    <span style="margin: 0 20px;">-</span>
-                    <mat-form-field
-                      appearance="outline"
-                      class="dialog__form__container__right__input__performs dialog__form__container__right__input"
-                    >
-                      <input matInput placeholder="445"
-                             formControlName="secondPerforation">
-                    </mat-form-field>
-                    <mat-icon
-                      class="dialog__form__container__right__icon"
-                      style="margin: 0 10px 0 20px;"
-                      (click)="addInterval()"
-                    >
-                      add
-                    </mat-icon>
-                    <span>Добавить интервал перфорации</span>
-                  </div>
-                  <ng-template #elseInterval>
-                    <div class="dialog__form__container__right__place">Интервал перфорации</div>
-                    <mat-form-field
-                      appearance="outline"
-                      class="dialog__form__container__right__input__performs dialog__form__container__right__input"
-                    >
-                      <input matInput placeholder="345" formControlName="firstPerforation">
-                    </mat-form-field>
-                    <span style="margin: 0 20px;">-</span>
-                    <mat-form-field
-                      appearance="outline"
-                      class="dialog__form__container__right__input__performs dialog__form__container__right__input"
-                    >
-                      <input matInput placeholder="445"
-                             formControlName="secondPerforation">
-                    </mat-form-field>
-                    <mat-icon
-                      class="dialog__form__container__right__icon"
-                      style="margin: 0 10px 0 20px; background: rgb(175, 112, 122);"
-                      (click)="removeInterval(i)"
-                    >
-                      close
-                    </mat-icon>
-                    <span>Удалить интервал перфорации</span>
-                  </ng-template>
-                </div>
-                <div class="dialog__form__container__right__block">
-                  <div class="dialog__form__container__right__place">Глубина отбора</div>
-                  <mat-form-field
-                    appearance="outline"
-                    class="dialog__form__container__right__input"
-                  >
-                    <input
-                      matInput
-                      placeholder="191920"
-                      formControlName="depth"
-                    >
-                  </mat-form-field>
-                </div>
-                <div class="dialog__form__container__right__block">
-                  <div class="dialog__form__container__right__place">Температура (°С)</div>
-                  <mat-form-field
-                    appearance="outline"
-                    class="dialog__form__container__right__input"
-                  >
-                    <input matInput formControlName="temperature">
-                  </mat-form-field>
-                </div>
-                <div class="dialog__form__container__right__block">
-                  <div class="dialog__form__container__right__place">Давление (МРа)</div>
-                  <mat-form-field
-                    appearance="outline"
-                    class="dialog__form__container__right__input"
-                  >
-                    <input matInput formControlName="pressure">
-                  </mat-form-field>
-                </div>
-                <div class="dialog__form__container__right__block">
-                  <div class="dialog__form__container__right__place">Дата отбора</div>
-                  <mat-form-field
-                    appearance="outline"
-                    class="dialog__form__container__right__input__datePicker dialog__form__container__right__input"
-                  >
-                    <input
-                      matInput
-                      placeholder="Выберите дату"
-                      [matDatepicker]="picker1"
-                      formControlName="setDate"
-                    >
-                    <mat-datepicker-toggle
-                      matSuffix
-                      [for]="picker1"
-                      class="dialog__form__container__left__icon"
-                    ></mat-datepicker-toggle>
-                    <mat-datepicker #picker1></mat-datepicker>
-                  </mat-form-field>
-                </div>
-                <div class="dialog__form__container__right__block">
-                  <div class="dialog__form__container__right__place">Дата поступления</div>
-                  <mat-form-field
-                    appearance="outline"
-                    class="dialog__form__container__right__input__datePicker dialog__form__container__right__input"
-                  >
-                    <input
-                      matInput
-                      placeholder="Выберите дату"
-                      [matDatepicker]="picker2"
-                      formControlName="receiptDate"
-                    >
-                    <mat-datepicker-toggle
-                      matSuffix
-                      [for]="picker2"
-                      class="dialog__form__container__left__icon"
-                    ></mat-datepicker-toggle>
-                    <mat-datepicker #picker2></mat-datepicker>
-                  </mat-form-field>
-                </div>
-                <div class="dialog__form__container__right__block">
-                  <div class="dialog__form__container__right__place">ID номер пробы</div>
-                  <mat-form-field
-                    appearance="outline"
-                    class="dialog__form__container__right__input"
-                  >
-                    <input matInput formControlName="IDOfSample">
-                  </mat-form-field>
-                  <button class="dialog__form__container__right__button">
-                    Сканировать
+                    <mat-icon>close</mat-icon>
                   </button>
                 </div>
+              </ng-template>
+              <div
+                class="dialog__form__container__right__background"
+                formGroupName="secondForm"
+              >
+                <div class="dialog__form__container__right__container">
+                  <div class="dialog__form__container__right__block">
+                    <div class="dialog__form__container__right__place">Месторождение</div>
+                    <mat-form-field
+                      appearance="outline"
+                      class="dialog__form__container__right__input"
+                    >
+                      <input
+                        matInput
+                        placeholder="с. Бесагалы"
+                        formControlName="field"
+                      >
+                      <mat-icon
+                        matSuffix
+                        class="dialog__form__container__left__icon"
+                        [matMenuTriggerFor]="menu2"
+                        style="cursor: pointer"
+                      >
+                        menu_book
+                      </mat-icon>
+                      <!--                    <mat-menu #menu2>-->
+                      <!--                      <mat-list>-->
+                      <!--                        <mat-list-item-->
+                      <!--                          *ngFor="let secondM of secondMenu"-->
+                      <!--                          (click)="this.form.controls.secondForm.controls.field.patchValue(secondM.item)"-->
+                      <!--                          -->
+                      <!--                          class="dialog__form__container__left__menu"-->
+                      <!--                        >-->
+                      <!--                          {{secondM.item}}-->
+                      <!--                        </mat-list-item>-->
+                      <!--                      </mat-list>-->
+                      <!--                    </mat-menu>-->
+                      <mat-menu #menu2>
+                        <mat-list>
+                          <mat-list-item
+                            *ngFor="let secondM of secondMenu"
+                            (click)="this.form.get('secondForm.field').patchValue(secondM.item)"
+
+                            class="dialog__form__container__left__menu"
+                          >
+                            {{secondM.item}}
+                          </mat-list-item>
+                        </mat-list>
+                      </mat-menu>
+
+                    </mat-form-field>
+                  </div>
+                  <div class="dialog__form__container__right__block">
+                    <div class="dialog__form__container__right__place">№ скважины</div>
+                    <mat-form-field
+                      appearance="outline"
+                      class="dialog__form__container__right__input"
+                    >
+                      <input
+                        matInput
+                        placeholder="191920"
+                        formControlName="numberOfWell"
+                      >
+                    </mat-form-field>
+                  </div>
+                  <div class="dialog__form__container__right__block">
+                    <div class="dialog__form__container__right__place">Количество проб</div>
+                    <div class="dialog__form__container__right__block">
+                      <mat-icon
+                        (click)="add()"
+                        class="dialog__form__container__right__icon"
+                      >
+                        add
+                      </mat-icon>
+                      <input
+                        matInput = {{count}}
+                        placeholder=""
+                        formControlName="numberOfSample"
+                        style="width: 30px; text-align: center">
+                      <mat-icon
+                        (click)="remove()"
+                        class="dialog__form__container__right__icon"
+                      >
+                        remove
+                      </mat-icon>
+                    </div>
+                  </div>
+                  <div class="dialog__form__container__right__block">
+                    <div class="dialog__form__container__right__place">Тип пробоотборника</div>
+                    <mat-form-field
+                      appearance="outline"
+                      class="dialog__form__container__right__input"
+                    >
+                      <input matInput formControlName="typeOfSampler">
+                      <mat-icon
+                        matSuffix
+                        class="dialog__form__container__left__icon"
+                        [matMenuTriggerFor]="menu3"
+                        style="cursor: pointer;"
+                      >
+                        menu_book
+                      </mat-icon>
+                      <mat-menu #menu3>
+                        <mat-list>
+                          <mat-list-item
+                            *ngFor="let thirdM of thirdMenu"
+                            (click)="this.form.get('secondForm.typeOfSampler').patchValue(thirdM.item)"
+
+                            class="dialog__form__container__left__menu"
+                          >
+                            {{thirdM.item}}
+                          </mat-list-item>
+                        </mat-list>
+                      </mat-menu>
+                    </mat-form-field>
+                  </div>
+                  <div
+                    class="dialog__form__container__right__block"
+                    *ngFor="let intVal of formArr; let i = index;"
+                    formArrayName="interval"
+                  >
+                    <div class="dialog__form__container__right__block" [formGroupName]="i">
+                      <div class="dialog__form__container__right__place">Интервал перфорации</div>
+                      <mat-form-field
+                        appearance="outline"
+                        class="dialog__form__container__right__input__performs dialog__form__container__right__input"
+                      >
+                        <input matInput placeholder="345" formControlName="firstPerforation">
+                      </mat-form-field>
+                      <span style="margin: 0 20px;">-</span>
+                      <mat-form-field
+                        appearance="outline"
+                        class="dialog__form__container__right__input__performs dialog__form__container__right__input"
+                      >
+                        <input matInput placeholder="445" formControlName="secondPerforation">
+                      </mat-form-field>
+
+                      <ng-container *ngIf="i < 1">
+                        <mat-icon
+                          class="dialog__form__container__right__icon"
+                          style="margin: 0 10px 0 20px;"
+                          (click)="addInterval()"
+                        >
+                          add
+                        </mat-icon>
+                        <span>Добавить интервал перфорации</span>
+                      </ng-container>
+
+                      <ng-container *ngIf="i >= 1">
+                        <mat-icon
+                          class="dialog__form__container__right__icon"
+                          style="margin: 0 10px 0 20px; background: rgb(175, 112, 122);"
+                          (click)="removeInterval(i)"
+                        >
+                          close
+                        </mat-icon>
+                        <span>Удалить интервал перфорации</span>
+                      </ng-container>
+                    </div>
+                    <!--                  <ng-template #elseInterval>-->
+                    <!--                    <div class="dialog__form__container__right__place">Интервал перфорации</div>-->
+                    <!--                    <mat-form-field-->
+                    <!--                      appearance="outline"-->
+                    <!--                      class="dialog__form__container__right__input__performs dialog__form__container__right__input"-->
+                    <!--                    >-->
+                    <!--                      <input matInput placeholder="345" formControlName="firstPerforation">-->
+                    <!--                    </mat-form-field>-->
+                    <!--                    <span style="margin: 0 20px;">-</span>-->
+                    <!--                    <mat-form-field-->
+                    <!--                      appearance="outline"-->
+                    <!--                      class="dialog__form__container__right__input__performs dialog__form__container__right__input"-->
+                    <!--                    >-->
+                    <!--                      <input matInput placeholder="445"-->
+                    <!--                             formControlName="secondPerforation">-->
+                    <!--                    </mat-form-field>-->
+                    <!--                    <mat-icon-->
+                    <!--                      class="dialog__form__container__right__icon"-->
+                    <!--                      style="margin: 0 10px 0 20px; background: rgb(175, 112, 122);"-->
+                    <!--                      (click)="removeInterval(i)"-->
+                    <!--                    >-->
+                    <!--                      close-->
+                    <!--                    </mat-icon>-->
+                    <!--                    <span>Удалить интервал перфорации</span>-->
+                    <!--                  </ng-template>-->
+                  </div>
+                  <div class="dialog__form__container__right__block">
+                    <div class="dialog__form__container__right__place">Глубина отбора</div>
+                    <mat-form-field
+                      appearance="outline"
+                      class="dialog__form__container__right__input"
+                    >
+                      <input
+                        matInput
+                        placeholder="191920"
+                        formControlName="depth"
+                      >
+                    </mat-form-field>
+                  </div>
+                  <div class="dialog__form__container__right__block">
+                    <div class="dialog__form__container__right__place">Температура (°С)</div>
+                    <mat-form-field
+                      appearance="outline"
+                      class="dialog__form__container__right__input"
+                    >
+                      <input matInput formControlName="temperature">
+                    </mat-form-field>
+                  </div>
+                  <div class="dialog__form__container__right__block">
+                    <div class="dialog__form__container__right__place">Давление (МРа)</div>
+                    <mat-form-field
+                      appearance="outline"
+                      class="dialog__form__container__right__input"
+                    >
+                      <input matInput formControlName="pressure">
+                    </mat-form-field>
+                  </div>
+                  <div class="dialog__form__container__right__block">
+                    <div class="dialog__form__container__right__place">Дата отбора</div>
+                    <mat-form-field
+                      appearance="outline"
+                      class="dialog__form__container__right__input__datePicker dialog__form__container__right__input"
+                    >
+                      <input
+                        matInput
+                        placeholder="Выберите дату"
+                        [matDatepicker]="picker1"
+                        formControlName="setDate"
+                      >
+                      <mat-datepicker-toggle
+                        matSuffix
+                        [for]="picker1"
+                        class="dialog__form__container__left__icon"
+                      ></mat-datepicker-toggle>
+                      <mat-datepicker #picker1></mat-datepicker>
+                    </mat-form-field>
+                  </div>
+                  <div class="dialog__form__container__right__block">
+                    <div class="dialog__form__container__right__place">Дата поступления</div>
+                    <mat-form-field
+                      appearance="outline"
+                      class="dialog__form__container__right__input__datePicker dialog__form__container__right__input"
+                    >
+                      <input
+                        matInput
+                        placeholder="Выберите дату"
+                        [matDatepicker]="picker2"
+                        formControlName="receiptDate"
+                      >
+                      <mat-datepicker-toggle
+                        matSuffix
+                        [for]="picker2"
+                        class="dialog__form__container__left__icon"
+                      ></mat-datepicker-toggle>
+                      <mat-datepicker #picker2></mat-datepicker>
+                    </mat-form-field>
+                  </div>
+                  <div class="dialog__form__container__right__block">
+                    <div class="dialog__form__container__right__place">ID номер пробы</div>
+                    <mat-form-field
+                      appearance="outline"
+                      class="dialog__form__container__right__input"
+                    >
+                      <input matInput formControlName="IDOfSample">
+                    </mat-form-field>
+                    <button class="dialog__form__container__right__button">
+                      Сканировать
+                    </button>
+                  </div>
+                </div>
               </div>
-            </div>
-          </mat-tab>
-        </mat-tab-group>
+            </mat-tab>
+          </mat-tab-group>
+        </div>
+      </div>
+      <div class="dialog__form__action">
+        <button
+          type="submit"
+          mat-raised-button
+          color="primary"
+          class="dialog__form__footer__buttonCreate"
+          mat-dialog-close
+          [disabled]="form.invalid"
+        >
+          Сохранить
+        </button>
+        <button
+          mat-button
+          type="reset"
+          class="dialog__form__footer__buttonCancel"
+          mat-dialog-close
+        >
+          Отменить
+        </button>
       </div>
     </div>
-    <div class="dialog__form__action">
-      <button
-        type="submit"
-        mat-raised-button
-        color="primary"
-        class="dialog__form__footer__buttonCreate"
-        mat-dialog-close
-        [disabled]="form.invalid"
-      >
-        Сохранить
-      </button>
-      <button
-        mat-button
-        type="reset"
-        class="dialog__form__footer__buttonCancel"
-        mat-dialog-close
-      >
-        Отменить
-      </button>
-    </div>
-  </div>
-</form>
+  </form>
