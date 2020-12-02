@@ -27,6 +27,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatNativeDateModule } from '@angular/material/core';
 import { DataPipe } from './data.pipe';
 import { DataTableComponent } from './data-table/data-table.component';
+import { NewformComponent } from './newform/newform.component';
 
 registerLocaleData(localeRu, 'ru');
 
@@ -36,7 +37,8 @@ registerLocaleData(localeRu, 'ru');
     TableComponent,
     InformationComponent,
     DataPipe,
-    DataTableComponent
+    DataTableComponent,
+    NewformComponent
   ],
   imports: [
     MatPaginatorModule,

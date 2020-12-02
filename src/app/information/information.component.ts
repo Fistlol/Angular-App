@@ -3,6 +3,7 @@ import {FormArray, FormBuilder, FormControl, Validators} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {DataTableComponent} from '../data-table/data-table.component';
 import {TableService} from '../services/table.service';
+import {interval, of} from 'rxjs';
 
 
 @Component({
@@ -46,7 +47,7 @@ export class InformationComponent implements OnInit {
   newForm;
   selected = new FormControl(0);
   selectAfterAdding = true;
-  tabs = [{form: this.form}];
+  tabs: any[] = [{form: this.form}];
   menus = [{item: 'test 1'}, {item: 'test 2'}, {item: 'test 3'}];
   secondMenu = [{item: 'test 1'}, {item: 'test 2'}, {item: 'test 3'}];
   thirdMenu = [{item: 'test 1'}, {item: 'test 2'}, {item: 'test 3'}];
@@ -86,44 +87,43 @@ export class InformationComponent implements OnInit {
     }
   }
 
+  selectTab(id: number): void {
+    this.tabs[this.selected.value].form = this.form.value;
+    // this.form.reset();
+    // this.form.setValue(this.tabs[id].form);
+    console.log(id, this.tabs);
+    this.form.get('secondForm').patchValue(this.tabs[id].form.secondForm);
+    this.selected.setValue(id);
+  }
+
   ngOnInit(): void {
   }
 
   addTab(selectAfterAdding): void {
-    this.newForm = this.fb.group({
-      appNumber: [null],
-      name: [null, Validators.required],
-      company: [null],
-      analysis: [null],
-      registrationDate: [null],
-      completionDate: [null, Validators.required],
-      laboratory: [null],
-      status: [null],
-      bin: [null, Validators.required],
-      numberOfContract: [null, Validators.required],
-      secondForm: this.fb.group({
+    this.tabs[this.selected.value] = {
+      form: this.form.value
+    };
+    this.form.patchValue({
+      secondForm: {
         field: [null],
-        numberOfWell: [null],
-        numberOfSample: this.count,
-        typeOfSampler: [null],
-        interval: this.fb.array([this.fb.group({
-          firstPerforation: [],
-          secondPerforation: []
-        })]),
-        // firstPerforation: [null],
-        // secondPerforation: [null],
-        depth: [null],
-        temperature: [null],
-        pressure: [null],
-        setDate: [null],
-        receiptDate: [null],
-        IDOfSample: [null]
-      })
+          numberOfWell: null,
+          numberOfSample: this.count = 2,
+          typeOfSampler: null,
+          interval: [{
+            firstPerforation: [],
+            secondPerforation: []
+          }],
+          depth: null,
+          temperature: null,
+          pressure: null,
+          setDate: null,
+          receiptDate: null,
+          IDOfSample: null
+      }
     });
-    this.tabs.push({form: this.newForm});
+    this.tabs.push({form: this.form});
     if (selectAfterAdding) {
       this.selected.setValue(this.tabs.length - 1);
-      this.newForm.get('secondForm').reset();
     }
     this.tabs.forEach(r => {
       console.log('Rrrr===', r.form.value);
@@ -163,7 +163,6 @@ export class InformationComponent implements OnInit {
   add(): void {
     this.count++;
     this.form.get('secondForm.numberOfSample').setValue(this.count);
-
     console.log(this.count);
   }
 

@@ -18,7 +18,7 @@
             >
               <mat-label>Наименование заказчика</mat-label>
               <input
-                matInput
+                matInput="count"
                 required
                 formControlName="name"
               >
@@ -52,7 +52,7 @@
                 class="dialog__form__container__left__input"
               >
                 <input
-                  matInput
+                  matInput="count"
                   placeholder="231232136171567"
                   formControlName="bin"
                   required
@@ -68,7 +68,7 @@
                 class="dialog__form__container__left__input"
               >
                 <input
-                  matInput
+                  matInput="count"
                   required
                   placeholder="1223"
                   formControlName="numberOfContract"
@@ -93,7 +93,7 @@
                   </ng-template>
                 </mat-label>
                 <input
-                  matInput
+                  matInput="count"
                   required
                   placeholder="Выберите дату"
                   formControlName="completionDate"
@@ -112,7 +112,7 @@
               appearance="outline"
               class="dialog__form__container__left__input"
             >
-              <input matInput placeholder="Прикрепить файл">
+              <input matInput="count" placeholder="Прикрепить файл">
               <mat-icon matPrefix class="dialog__form__container__left__icon">save_alt</mat-icon>
             </mat-form-field>
           </div>
@@ -128,7 +128,7 @@
           <mat-tab-group
             mat-align-tabs="start"
             [selectedIndex]="selected.value"
-            (selectedIndexChange)="selected.setValue($event)"
+            (selectedIndexChange)="selectTab($event)"
           >
             <mat-tab
               *ngFor="let tab of tabs; let index = index"
@@ -159,7 +159,7 @@
                       class="dialog__form__container__right__input"
                     >
                       <input
-                        matInput
+                        matInput="count"
                         placeholder="с. Бесагалы"
                         formControlName="field"
                       >
@@ -205,7 +205,7 @@
                       class="dialog__form__container__right__input"
                     >
                       <input
-                        matInput
+                        matInput="count"
                         placeholder="191920"
                         formControlName="numberOfWell"
                       >
@@ -221,7 +221,7 @@
                         add
                       </mat-icon>
                       <input
-                        matInput = {{count}}
+                        matInput="count" = {{count}}
                         placeholder=""
                         formControlName="numberOfSample"
                         style="width: 30px; text-align: center">
@@ -239,7 +239,7 @@
                       appearance="outline"
                       class="dialog__form__container__right__input"
                     >
-                      <input matInput formControlName="typeOfSampler">
+                      <input matInput="count" formControlName="typeOfSampler">
                       <mat-icon
                         matSuffix
                         class="dialog__form__container__left__icon"
@@ -273,14 +273,14 @@
                         appearance="outline"
                         class="dialog__form__container__right__input__performs dialog__form__container__right__input"
                       >
-                        <input matInput placeholder="345" formControlName="firstPerforation">
+                        <input matInput="count" placeholder="345" formControlName="firstPerforation">
                       </mat-form-field>
                       <span style="margin: 0 20px;">-</span>
                       <mat-form-field
                         appearance="outline"
                         class="dialog__form__container__right__input__performs dialog__form__container__right__input"
                       >
-                        <input matInput placeholder="445" formControlName="secondPerforation">
+                        <input matInput="count" placeholder="445" formControlName="secondPerforation">
                       </mat-form-field>
 
                       <ng-container *ngIf="i < 1">
@@ -338,7 +338,7 @@
                       class="dialog__form__container__right__input"
                     >
                       <input
-                        matInput
+                        matInput="count"
                         placeholder="191920"
                         formControlName="depth"
                       >
@@ -350,7 +350,7 @@
                       appearance="outline"
                       class="dialog__form__container__right__input"
                     >
-                      <input matInput formControlName="temperature">
+                      <input matInput="count" formControlName="temperature">
                     </mat-form-field>
                   </div>
                   <div class="dialog__form__container__right__block">
@@ -359,7 +359,7 @@
                       appearance="outline"
                       class="dialog__form__container__right__input"
                     >
-                      <input matInput formControlName="pressure">
+                      <input matInput="count" formControlName="pressure">
                     </mat-form-field>
                   </div>
                   <div class="dialog__form__container__right__block">
@@ -369,7 +369,7 @@
                       class="dialog__form__container__right__input__datePicker dialog__form__container__right__input"
                     >
                       <input
-                        matInput
+                        matInput="count"
                         placeholder="Выберите дату"
                         [matDatepicker]="picker1"
                         formControlName="setDate"
@@ -389,7 +389,7 @@
                       class="dialog__form__container__right__input__datePicker dialog__form__container__right__input"
                     >
                       <input
-                        matInput
+                        matInput="count"
                         placeholder="Выберите дату"
                         [matDatepicker]="picker2"
                         formControlName="receiptDate"
@@ -408,7 +408,7 @@
                       appearance="outline"
                       class="dialog__form__container__right__input"
                     >
-                      <input matInput formControlName="IDOfSample">
+                      <input matInput="count" formControlName="IDOfSample">
                     </mat-form-field>
                     <button class="dialog__form__container__right__button">
                       Сканировать
