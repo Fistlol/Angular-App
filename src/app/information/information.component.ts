@@ -177,8 +177,6 @@ export class InformationComponent implements OnInit {
 
   add(): void {
     this.count++;
-    this.form.get('secondForm.numberOfSample').patchValue(this.count);
-    console.log(this.count);
   }
 
   remove(): void {
@@ -186,10 +184,6 @@ export class InformationComponent implements OnInit {
     if (this.count <= 1) {
       this.count = 1;
     }
-
-    this.form.get('secondForm.numberOfSample').patchValue(this.count);
-
-    console.log(this.count);
   }
 
   plusPositionAfter(): object {

@@ -110,7 +110,7 @@ export class DataTableComponent implements AfterViewInit, OnInit {
         this.activeRow.laboratory = result.laboratory;
         this.activeRow.status = result.status;
         this.activeRow.bin = result.bin;
-        this.activeRow.secondForm(result.data);
+        this.tableService.add(result);
       }
     });
   }

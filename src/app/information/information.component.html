@@ -201,12 +201,9 @@
                       >
                         add
                       </mat-icon>
-                      <input
-                        matInput={{count}}
-                        placeholder=""
-                        [formControl]="secondForm.get('numberOfSample')"
-                        style="width: 30px; text-align: center"
-                      >
+                      <span style="margin: 0 10px">
+                        {{count}}
+                      </span>
                       <mat-icon
                         (click)="remove()"
                         class="dialog__form__container__right__icon"
