@@ -1,3 +1,5 @@
+import {Data} from './data';
+
 export interface Worker {
   appNumber: string;
   name: string;
@@ -10,4 +12,5 @@ export interface Worker {
   bin: number;
   numberOfContract: string;
   numberOfSample: number;
+  data: Data[];
 }

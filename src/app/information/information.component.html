@@ -131,8 +131,8 @@
             (selectedIndexChange)="selectTab($event)"
           >
             <mat-tab
-              *ngFor="let tab of tabs; let index = index"
-              [label]="tab"
+              *ngFor="let secondForm of this.form.get('secondForm')['controls']; let index = index"
+              [label]="'tab'"
             >
               <ng-template mat-tab-label>
                 <div class="dialog__form__container__right">
@@ -140,29 +140,23 @@
                   <div class="dialog__form__container__right__line"></div>
                   <button
                     mat-icon-button
-                    [disabled]="tabs.length === 1"
+                    [disabled]="index === 0"
                     (click)="removeTab(index)"
                   >
                     <mat-icon>close</mat-icon>
                   </button>
                 </div>
               </ng-template>
-              <div
-                class="dialog__form__container__right__background"
-                formGroupName="secondForm"
-              >
+              <div class="dialog__form__container__right__background">
                 <div class="dialog__form__container__right__container">
                   <div class="dialog__form__container__right__block">
+
                     <div class="dialog__form__container__right__place">Месторождение</div>
-                    <mat-form-field
-                      appearance="outline"
-                      class="dialog__form__container__right__input"
-                    >
-                      <input
-                        matInput="count"
-                        placeholder="с. Бесагалы"
-                        formControlName="field"
-                      >
+
+                    <mat-form-field appearance="outline" class="dialog__form__container__right__input">
+                      <input matInput type="text"
+                             placeholder="с. Бесагалы"
+                             [formControl]="secondForm.get('field')" />
                       <mat-icon
                         matSuffix
                         class="dialog__form__container__left__icon"
@@ -171,18 +165,6 @@
                       >
                         menu_book
                       </mat-icon>
-                      <!--                    <mat-menu #menu2>-->
-                      <!--                      <mat-list>-->
-                      <!--                        <mat-list-item-->
-                      <!--                          *ngFor="let secondM of secondMenu"-->
-                      <!--                          (click)="this.form.controls.secondForm.controls.field.patchValue(secondM.item)"-->
-                      <!--                          -->
-                      <!--                          class="dialog__form__container__left__menu"-->
-                      <!--                        >-->
-                      <!--                          {{secondM.item}}-->
-                      <!--                        </mat-list-item>-->
-                      <!--                      </mat-list>-->
-                      <!--                    </mat-menu>-->
                       <mat-menu #menu2>
                         <mat-list>
                           <mat-list-item
@@ -195,7 +177,6 @@
                           </mat-list-item>
                         </mat-list>
                       </mat-menu>
-
                     </mat-form-field>
                   </div>
                   <div class="dialog__form__container__right__block">
@@ -207,7 +188,7 @@
                       <input
                         matInput="count"
                         placeholder="191920"
-                        formControlName="numberOfWell"
+                        [formControl]="secondForm.get('numberOfWell')"
                       >
                     </mat-form-field>
                   </div>
@@ -221,10 +202,11 @@
                         add
                       </mat-icon>
                       <input
-                        matInput="count" = {{count}}
+                        matInput={{count}}
                         placeholder=""
-                        formControlName="numberOfSample"
-                        style="width: 30px; text-align: center">
+                        [formControl]="secondForm.get('numberOfSample')"
+                        style="width: 30px; text-align: center"
+                      >
                       <mat-icon
                         (click)="remove()"
                         class="dialog__form__container__right__icon"
@@ -239,7 +221,7 @@
                       appearance="outline"
                       class="dialog__form__container__right__input"
                     >
-                      <input matInput="count" formControlName="typeOfSampler">
+                      <input matInput="count" [formControl]="secondForm.get('typeOfSampler')">
                       <mat-icon
                         matSuffix
                         class="dialog__form__container__left__icon"
@@ -262,7 +244,7 @@
                       </mat-menu>
                     </mat-form-field>
                   </div>
-                  <div
+ <!--                 <div
                     class="dialog__form__container__right__block"
                     *ngFor="let intVal of formArr; let i = index;"
                     formArrayName="interval"
@@ -273,14 +255,14 @@
                         appearance="outline"
                         class="dialog__form__container__right__input__performs dialog__form__container__right__input"
                       >
-                        <input matInput="count" placeholder="345" formControlName="firstPerforation">
+                        <input matInput="count" placeholder="345" [formControl]="secondForm.get('interval.firstPerforation')">
                       </mat-form-field>
                       <span style="margin: 0 20px;">-</span>
                       <mat-form-field
                         appearance="outline"
                         class="dialog__form__container__right__input__performs dialog__form__container__right__input"
                       >
-                        <input matInput="count" placeholder="445" formControlName="secondPerforation">
+                        <input matInput="count" placeholder="445" [formControl]="secondForm.get('interval.secondPerforation')">
                       </mat-form-field>
 
                       <ng-container *ngIf="i < 1">
@@ -305,32 +287,7 @@
                         <span>Удалить интервал перфорации</span>
                       </ng-container>
                     </div>
-                    <!--                  <ng-template #elseInterval>-->
-                    <!--                    <div class="dialog__form__container__right__place">Интервал перфорации</div>-->
-                    <!--                    <mat-form-field-->
-                    <!--                      appearance="outline"-->
-                    <!--                      class="dialog__form__container__right__input__performs dialog__form__container__right__input"-->
-                    <!--                    >-->
-                    <!--                      <input matInput placeholder="345" formControlName="firstPerforation">-->
-                    <!--                    </mat-form-field>-->
-                    <!--                    <span style="margin: 0 20px;">-</span>-->
-                    <!--                    <mat-form-field-->
-                    <!--                      appearance="outline"-->
-                    <!--                      class="dialog__form__container__right__input__performs dialog__form__container__right__input"-->
-                    <!--                    >-->
-                    <!--                      <input matInput placeholder="445"-->
-                    <!--                             formControlName="secondPerforation">-->
-                    <!--                    </mat-form-field>-->
-                    <!--                    <mat-icon-->
-                    <!--                      class="dialog__form__container__right__icon"-->
-                    <!--                      style="margin: 0 10px 0 20px; background: rgb(175, 112, 122);"-->
-                    <!--                      (click)="removeInterval(i)"-->
-                    <!--                    >-->
-                    <!--                      close-->
-                    <!--                    </mat-icon>-->
-                    <!--                    <span>Удалить интервал перфорации</span>-->
-                    <!--                  </ng-template>-->
-                  </div>
+                  </div> -->
                   <div class="dialog__form__container__right__block">
                     <div class="dialog__form__container__right__place">Глубина отбора</div>
                     <mat-form-field
@@ -340,7 +297,7 @@
                       <input
                         matInput="count"
                         placeholder="191920"
-                        formControlName="depth"
+                        [formControl]="secondForm.get('depth')"
                       >
                     </mat-form-field>
                   </div>
@@ -350,7 +307,7 @@
                       appearance="outline"
                       class="dialog__form__container__right__input"
                     >
-                      <input matInput="count" formControlName="temperature">
+                      <input matInput="count" [formControl]="secondForm.get('temperature')">
                     </mat-form-field>
                   </div>
                   <div class="dialog__form__container__right__block">
@@ -359,7 +316,7 @@
                       appearance="outline"
                       class="dialog__form__container__right__input"
                     >
-                      <input matInput="count" formControlName="pressure">
+                      <input matInput="count" [formControl]="secondForm.get('pressure')">
                     </mat-form-field>
                   </div>
                   <div class="dialog__form__container__right__block">
@@ -372,7 +329,7 @@
                         matInput="count"
                         placeholder="Выберите дату"
                         [matDatepicker]="picker1"
-                        formControlName="setDate"
+                        [formControl]="secondForm.get('setDate')"
                       >
                       <mat-datepicker-toggle
                         matSuffix
@@ -392,7 +349,7 @@
                         matInput="count"
                         placeholder="Выберите дату"
                         [matDatepicker]="picker2"
-                        formControlName="receiptDate"
+                        [formControl]="secondForm.get('receiptDate')"
                       >
                       <mat-datepicker-toggle
                         matSuffix
@@ -408,7 +365,7 @@
                       appearance="outline"
                       class="dialog__form__container__right__input"
                     >
-                      <input matInput="count" formControlName="IDOfSample">
+                      <input matInput="count" [formControl]="secondForm.get('IDOfSample')">
                     </mat-form-field>
                     <button class="dialog__form__container__right__button">
                       Сканировать

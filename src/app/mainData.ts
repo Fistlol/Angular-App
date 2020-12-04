@@ -15,7 +15,8 @@ export const important: Worker[] = [
     status: 'Новая',
     bin: 21331232,
     numberOfContract: '№ 208-112-34',
-    numberOfSample: 2
+    numberOfSample: 2,
+    data: []
   },
   {
     appNumber: 'НТ - 30',
@@ -28,7 +29,8 @@ export const important: Worker[] = [
     status: 'Идет исследование',
     bin: 21331232,
     numberOfContract: '№ 208-112-34',
-    numberOfSample: 2
+    numberOfSample: 2,
+    data: []
   },
   {
     appNumber: 'IОР - 66\nНТ - 30',
@@ -41,7 +43,8 @@ export const important: Worker[] = [
     status: 'Новая',
     bin: 21331232,
     numberOfContract: '№ 208-112-34',
-    numberOfSample: 2
+    numberOfSample: 2,
+    data: []
   },
   {
     appNumber: 'IОР - 66\nНТ - 30',
@@ -54,7 +57,8 @@ export const important: Worker[] = [
     status: 'Новая',
     bin: 21331232,
     numberOfContract: '№ 208-112-34',
-    numberOfSample: 2
+    numberOfSample: 2,
+    data: []
   },
   {
     appNumber: 'НТ - 30',
@@ -67,6 +71,7 @@ export const important: Worker[] = [
     status: 'На доработке',
     bin: 21331232,
     numberOfContract: '№ 208-112-34',
-    numberOfSample: 2
+    numberOfSample: 2,
+    data: []
   }
 ];

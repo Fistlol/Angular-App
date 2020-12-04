@@ -21,6 +21,7 @@ export class TableService {
     const data = [...this.data.value];
     data.push(x);
     this.data.next(data);
+    console.log('Data Behavior', data);
   }
 
   addDialog(x): void {

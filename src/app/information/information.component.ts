@@ -1,9 +1,8 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {FormArray, FormBuilder, FormControl, Validators} from '@angular/forms';
+import {Form, FormArray, FormBuilder, FormControl, Validators} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {DataTableComponent} from '../data-table/data-table.component';
 import {TableService} from '../services/table.service';
-import {interval, of} from 'rxjs';
 
 
 @Component({
@@ -12,6 +11,7 @@ import {interval, of} from 'rxjs';
   styleUrls: ['./information.component.scss']
 })
 export class InformationComponent implements OnInit {
+
   loading = true;
   count = 2;
   form = this.fb.group({
@@ -25,29 +25,11 @@ export class InformationComponent implements OnInit {
     status: [null],
     bin: [null, Validators.required],
     numberOfContract: [null, Validators.required],
-    secondForm: this.fb.group({
-      field: [null],
-      numberOfWell: [null],
-      numberOfSample: this.count,
-      typeOfSampler: [null],
-      interval: this.fb.array([this.fb.group({
-        firstPerforation: [],
-        secondPerforation: []
-      })]),
-      // firstPerforation: [null],
-      // secondPerforation: [null],
-      depth: [null],
-      temperature: [null],
-      pressure: [null],
-      setDate: [null],
-      receiptDate: [null],
-      IDOfSample: [null]
-    })
+    secondForm: this.fb.array([])
   });
-  newForm;
   selected = new FormControl(0);
   selectAfterAdding = true;
-  tabs: any[] = [{form: this.form}];
+  tabs: any[] = [{form: this.form.controls.secondForm}];
   menus = [{item: 'test 1'}, {item: 'test 2'}, {item: 'test 3'}];
   secondMenu = [{item: 'test 1'}, {item: 'test 2'}, {item: 'test 3'}];
   thirdMenu = [{item: 'test 1'}, {item: 'test 2'}, {item: 'test 3'}];
@@ -61,25 +43,37 @@ export class InformationComponent implements OnInit {
     public dialogRef: MatDialogRef<DataTableComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private tableService: TableService) {
-    console.log('----------------------------', this.form);
+    console.log('Data ===============================================', data);
+
+    if (data.type === 'create') {
+      return;
+    }
     if (data) {
       // tslint:disable-next-line:forin
       for (const key in data) {
-        console.log(key, data[key]);
         if (data[key]) {
           this.form.get(key).patchValue(data[key]);
           if (key === 'secondForm' && data[key] && data[key].numberOfSample) {
             this.count = data[key].numberOfSample;
           }
-          if (key === 'secondForm' && data[key].interval) {
-            this.form.value.secondForm.interval = [];
-            const value = this.form.get('secondForm.interval') as FormArray;
-            data[key].interval.forEach((r, i) => {
-              if (i !== 0) {
-                value.push(
-                  this.fb.group(r)
-                );
-              }
+          // if (key === 'secondForm' && data[key].interval) {
+          //   this.form.value.secondForm.interval = [];
+          //   const value = this.form.get('secondForm.interval') as FormArray;
+          //   data[key].interval.forEach((r, i) => {
+          //     if (i !== 0) {
+          //       value.push(
+          //         this.fb.group(r)
+          //       );
+          //     }
+          //   });
+          // }
+          if (key === 'secondForm') {
+            this.form.value.secondForm = [];
+            const test = this.form.get('secondForm') as FormArray;
+            data[key].forEach((d, i) => {
+              test.push(
+                this.fb.group(d)
+              );
             });
           }
         }
@@ -88,57 +82,77 @@ export class InformationComponent implements OnInit {
   }
 
   selectTab(id: number): void {
-    this.tabs[this.selected.value].form = this.form.value;
-    // this.form.reset();
-    // this.form.setValue(this.tabs[id].form);
-    console.log(id, this.tabs);
-    this.form.get('secondForm').patchValue(this.tabs[id].form.secondForm);
-    this.selected.setValue(id);
   }
 
   ngOnInit(): void {
+    this.addTab(this.selectAfterAdding);
+
   }
 
   addTab(selectAfterAdding): void {
-    this.tabs[this.selected.value] = {
-      form: this.form.value
-    };
-    this.form.patchValue({
-      secondForm: {
-        field: [null],
-          numberOfWell: null,
-          numberOfSample: this.count = 2,
-          typeOfSampler: null,
-          interval: [{
-            firstPerforation: [],
-            secondPerforation: []
-          }],
-          depth: null,
-          temperature: null,
-          pressure: null,
-          setDate: null,
-          receiptDate: null,
-          IDOfSample: null
-      }
+    const secondForm = this.fb.group({
+      field: [null],
+      numberOfWell: [null],
+      numberOfSample: this.count,
+      typeOfSampler: [null],
+      interval: this.fb.array([this.fb.group({
+        firstPerforation: [],
+        secondPerforation: []
+      })]),
+      depth: [null],
+      temperature: [null],
+      pressure: [null],
+      setDate: [null],
+      receiptDate: [null],
+      IDOfSample: [null]
     });
-    this.tabs.push({form: this.form});
+    const formArray = this.form.get('secondForm') as FormArray;
+    formArray.push(secondForm);
     if (selectAfterAdding) {
-      this.selected.setValue(this.tabs.length - 1);
+      this.selected.setValue(formArray.length - 1);
     }
-    this.tabs.forEach(r => {
-      console.log('Rrrr===', r.form.value);
-    });
   }
 
+  // addTab(selectAfterAdding): void {
+  //   this.tabs[this.selected.value] = {
+  //     form: this.form.value
+  //   };
+  //   this.form.patchValue({
+  //     secondForm: {
+  //       field: [null],
+  //         numberOfWell: null,
+  //         numberOfSample: this.count = 2,
+  //         typeOfSampler: null,
+  //         interval: [{
+  //           firstPerforation: null,
+  //           secondPerforation: null
+  //         }],
+  //         depth: null,
+  //         temperature: null,
+  //         pressure: null,
+  //         setDate: null,
+  //         receiptDate: null,
+  //         IDOfSample: null
+  //     }
+  //   });
+  //   this.form.get('secondForm.interval').reset();
+  //   this.tabs.push({form: this.form});
+  //   if (selectAfterAdding) {
+  //     this.selected.setValue(this.tabs.length - 1);
+  //   }
+  //   this.tabs.forEach(r => {
+  //     console.log('Rrrr===', r.form.value);
+  //   });
+  // }
+
   removeTab(index: number): void {
-    this.tabs.splice(index, 1);
-    this.selected.setValue(this.tabs.length - 1);
+    const secondForm = this.form.get('secondForm') as FormArray;
+    secondForm.removeAt(index);
   }
 
   onSubmit(): void {
     // this.tableService.addTable(this.form.value);
-    console.log(this.form.value);
-    this.dialogRef.close(this.form);
+    this.dialogRef.close(this.form.value);
     this.tableService.addDialog(this.form.get('secondForm'));
   }
 
@@ -152,6 +166,7 @@ export class InformationComponent implements OnInit {
       secondPerforation: []
     }));
     console.log('AddInterval', this.form.value);
+    console.log(this.form);
   }
 
   removeInterval(index: number): void {
@@ -162,7 +177,7 @@ export class InformationComponent implements OnInit {
 
   add(): void {
     this.count++;
-    this.form.get('secondForm.numberOfSample').setValue(this.count);
+    this.form.get('secondForm.numberOfSample').patchValue(this.count);
     console.log(this.count);
   }
 
@@ -172,7 +187,7 @@ export class InformationComponent implements OnInit {
       this.count = 1;
     }
 
-    this.form.get('secondForm.numberOfSample').setValue(this.count);
+    this.form.get('secondForm.numberOfSample').patchValue(this.count);
 
     console.log(this.count);
   }
@@ -184,15 +199,16 @@ export class InformationComponent implements OnInit {
     return styles;
   }
 
+
   plusPositionBefore(): object {
     let styles = {};
-    if (this.tabs.length > 3) {
+    if (this.form.get('secondForm').value.length > 3) {
       styles = {
         'right.px': -30
       };
     } else {
       styles = {
-        'left.px': 270 * this.tabs.length
+        'left.px': 270 * this.form.get('secondForm').value.length
       };
     }
     return styles;
